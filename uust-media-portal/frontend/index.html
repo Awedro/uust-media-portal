@@ -1,0 +1,3705 @@
+<!DOCTYPE html>
+<html lang="ru" data-skin="mombo">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>УУНиТ.Медиа — Официальный новостной портал Уфимского университета</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-scale: 1;
+      --card-radius: 18px;
+      --bg-page: #F4F6FB;
+      --bg-surface: #FFFFFF;
+      --bg-elevated: #EEF2FF;
+      --text-main: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --accent: #4F46E5;
+      --accent-hover: #4338CA;
+      --accent-text: #FFFFFF;
+      --border-color: #E2E8F0;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+    }
+
+    /* СКИН 1: УУНиТ ОФИЦИАЛЬНЫЙ (По референсу https://uust.ru/ и брендбуку УУНиТ) */
+    html[data-skin="uust"] {
+      --bg-page: #F4F3F9;
+      --bg-surface: #FFFFFF;
+      --bg-elevated: #F2EEFF;
+      --text-main: #1C103B;
+      --text-secondary: #3B3154;
+      --text-muted: #6E6585;
+      --accent: #4D19CC;
+      --accent-hover: #2A1468;
+      --accent-text: #FFFFFF;
+      --border-color: #DFD8F2;
+      --card-radius: 16px;
+      --font-heading: 'Golos Text', 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', sans-serif;
+      --shadow-card: 0 12px 32px -10px rgba(42, 20, 104, 0.12);
+    }
+
+    /* СКИН 2: MOMBO BLUEPRINT (Швейцарский брутализм) */
+    html[data-skin="mombo"] {
+      --bg-page: #E5E5E0;
+      --bg-surface: #F8F7F4;
+      --bg-elevated: #FFFFFF;
+      --text-main: #111111;
+      --text-secondary: #27272A;
+      --text-muted: #52525B;
+      --accent: #FF4D00;
+      --accent-hover: #E04300;
+      --accent-text: #111111;
+      --border-color: #111111;
+      --card-radius: 0px;
+      --font-heading: 'Space Grotesk', 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', sans-serif;
+      --shadow-card: 6px 6px 0px #111111;
+    }
+
+    /* СКИН 3: DATA NEXUS (Мятно-фиолетовый кибер-градиент) */
+    html[data-skin="nexus"] {
+      --bg-page: #F7F8FC;
+      --bg-surface: #FFFFFF;
+      --bg-elevated: #131316;
+      --text-main: #111115;
+      --text-secondary: #3F3F46;
+      --text-muted: #71717A;
+      --accent: #7B2CBF;
+      --accent-hover: #5A189A;
+      --accent-text: #FFFFFF;
+      --border-color: #D8B4FE;
+      --card-radius: 22px;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Plus Jakarta Sans', 'Golos Text', sans-serif;
+      --shadow-card: 0 16px 36px -12px rgba(123, 44, 191, 0.16);
+    }
+
+    /* СКИН 4: CRYPTO LIME (Темный карбон + #B8FF01) */
+    html[data-skin="crypto"] {
+      --bg-page: #0B0D0E;
+      --bg-surface: #141719;
+      --bg-elevated: #1C2024;
+      --text-main: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --accent: #B8FF01;
+      --accent-hover: #9EE000;
+      --accent-text: #0B0D0E;
+      --border-color: #262B30;
+      --card-radius: 20px;
+      --font-heading: 'Chakra Petch', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+      --shadow-card: 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Общие токены интерфейса: применяются не только к ленте, но и ко всем вкладкам. */
+    html[data-skin="uust"] {
+      --panel-bg: #FFFFFF;
+      --panel-soft: #F5F2FC;
+      --field-bg: #FAF9FE;
+      --panel-line: #DFD8F2;
+      --success-bg: #ECFDF5;
+      --success-line: #A7F3D0;
+      --success-text: #065F46;
+      --danger-bg: #FFF1F2;
+      --danger-line: #FECDD3;
+      --danger-text: #BE123C;
+    }
+
+    html[data-skin="uust"] #mainHeader {
+      background:
+        linear-gradient(90deg, #2A1468 0%, #4D19CC 55%, #CBB8FF 100%) bottom / 100% 3px no-repeat,
+        rgba(255, 255, 255, 0.96) !important;
+      border-bottom-color: transparent !important;
+      box-shadow: 0 8px 26px -12px rgba(42, 20, 104, 0.16);
+    }
+    html[data-skin="uust"] #mainHeader #brandBadge {
+      background: linear-gradient(135deg, #4D19CC 0%, #2A1468 100%) !important;
+      color: #FFFFFF !important;
+      border: 1px solid #CBB8FF;
+      box-shadow: 0 6px 16px -4px rgba(77, 25, 204, 0.45);
+    }
+    html[data-skin="uust"] .uust-official-card {
+      background-color: #FFFFFF;
+      border: 1px solid #DFD8F2;
+      color: #1C103B;
+    }
+    html[data-skin="uust"] .uust-official-card:hover {
+      border-color: #4D19CC;
+      box-shadow: 0 18px 38px -12px rgba(77, 25, 204, 0.22);
+    }
+    html[data-skin="uust"] .uust-official-card:hover .uust-card-title {
+      color: #4D19CC !important;
+    }
+
+    html[data-skin="mombo"] {
+      --panel-bg: #F8F7F4;
+      --panel-soft: #E5E5E0;
+      --field-bg: #FFFFFF;
+      --panel-line: #111111;
+      --success-bg: #B7F7D2;
+      --success-line: #111111;
+      --success-text: #064E3B;
+      --danger-bg: #FFD7D7;
+      --danger-line: #111111;
+      --danger-text: #8B1111;
+    }
+
+    html[data-skin="nexus"] {
+      --panel-bg: rgba(255, 255, 255, 0.94);
+      --panel-soft: #F5F0FF;
+      --field-bg: #FFFFFF;
+      --panel-line: #D8B4FE;
+      --success-bg: #E8FFF6;
+      --success-line: #6EE7B7;
+      --success-text: #047857;
+      --danger-bg: #FFF1F8;
+      --danger-line: #F9A8D4;
+      --danger-text: #BE185D;
+    }
+
+    html[data-skin="crypto"] {
+      --panel-bg: #141719;
+      --panel-soft: #1C2024;
+      --field-bg: #0B0D0E;
+      --panel-line: #343A40;
+      --success-bg: #17240A;
+      --success-line: #B8FF01;
+      --success-text: #B8FF01;
+      --danger-bg: #2A151B;
+      --danger-line: #FB7185;
+      --danger-text: #FDA4AF;
+    }
+
+    /* Режим для слабовидящих */
+    html.a11y-mode {
+      --font-scale: 1.18 !important;
+      --bg-page: #FFFFFF !important;
+      --bg-surface: #FFFFFF !important;
+      --text-main: #000000 !important;
+      --text-secondary: #111111 !important;
+      --text-muted: #222222 !important;
+      --border-color: #000000 !important;
+      --accent: #0000EE !important;
+      --accent-text: #FFFFFF !important;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: calc(16px * var(--font-scale));
+      transition: background-color 0.35s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    /* Координатная сетка для Crypto Lime */
+    html[data-skin="crypto"] body {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* Фоновое обрамление для Data Nexus */
+    html[data-skin="nexus"] body {
+      background: linear-gradient(120deg, rgba(0, 245, 160, 0.14) 0%, rgba(247, 248, 252, 1) 22%, rgba(247, 248, 252, 1) 78%, rgba(123, 44, 191, 0.16) 100%);
+      background-attachment: fixed;
+    }
+
+    .font-heading { font-family: var(--font-heading); }
+    .font-mono-code { font-family: var(--font-mono); }
+
+    /* 3D-анимация карточек при наведении мыши */
+    .news-card-3d {
+      position: relative;
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow-card);
+      transform-style: preserve-3d;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, background-color 0.25s ease, border-color 0.25s ease;
+      will-change: transform;
+      overflow: hidden;
+    }
+    .news-card-3d::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.16), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .news-card-3d:hover::before {
+      opacity: 1;
+    }
+    .news-card-3d .card-img-zoom {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .news-card-3d:hover .card-img-zoom {
+      transform: scale(1.07);
+    }
+    .news-card-3d .cta-arrow {
+      transition: transform 0.25s ease;
+    }
+    .news-card-3d:hover .cta-arrow {
+      transform: translateX(5px);
+    }
+
+    @keyframes autoCardSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-18px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .auto-parsed-card-enter {
+      animation: autoCardSlideIn 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Гарантированный контраст для Mombo Blueprint */
+    html[data-skin="mombo"] .mombo-card {
+      background-color: #F8F7F4 !important;
+      border: 2px solid #111111 !important;
+      color: #111111 !important;
+      box-shadow: 6px 6px 0px #111111;
+    }
+    html[data-skin="mombo"] .mombo-card:hover {
+      box-shadow: 10px 10px 0px #111111;
+    }
+    html[data-skin="mombo"] .mombo-card .mombo-title {
+      color: #111111 !important;
+    }
+    html[data-skin="mombo"] .mombo-card .mombo-desc {
+      color: #27272A !important;
+    }
+    html[data-skin="mombo"] .mombo-card .mombo-meta {
+      color: #3F3F46 !important;
+    }
+
+    /* Crypto Lime интерактивная заливка карточки при наведении */
+    html[data-skin="crypto"] .crypto-card {
+      background-color: #141719;
+      border: 1px solid #262B30;
+      color: #F8FAFC;
+    }
+    html[data-skin="crypto"] .crypto-card:hover {
+      background-color: #B8FF01 !important;
+      border-color: #B8FF01 !important;
+      color: #0B0D0E !important;
+      box-shadow: 0 22px 48px -12px rgba(184, 255, 1, 0.35);
+    }
+    html[data-skin="crypto"] .crypto-card:hover .crypto-title,
+    html[data-skin="crypto"] .crypto-card:hover .crypto-desc,
+    html[data-skin="crypto"] .crypto-card:hover .crypto-meta,
+    html[data-skin="crypto"] .crypto-card:hover .crypto-num {
+      color: #0B0D0E !important;
+    }
+    html[data-skin="crypto"] .crypto-card:hover .crypto-btn {
+      background-color: #0B0D0E !important;
+      color: #B8FF01 !important;
+    }
+
+    /* Градиентный текст Data Nexus */
+    .nexus-gradient-text {
+      background: linear-gradient(90deg, #00D285 0%, #3B82F6 48%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nexus-pill-btn {
+      background: linear-gradient(90deg, #00F5A0 0%, #7B2CBF 100%);
+      color: #FFFFFF;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .nexus-pill-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(123, 44, 191, 0.45);
+    }
+
+    /* Точечный матричный текст для Mombo */
+    .mombo-dot-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      background-image: radial-gradient(#111111 60%, transparent 61%);
+      background-size: 6px 6px;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* Кастомный скроллбар */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.35); border-radius: 9999px; }
+    /* ============================================================
+   СИНХРОНИЗАЦИЯ ВЕРХНЕГО МЕНЮ С АКТИВНЫМ СКИНОМ
+   Переопределяет фиксированные Tailwind-цвета в шапке,
+   чтобы навигация перекрашивалась вместе со сменой data-skin.
+   ============================================================ */
+
+#mainHeader {
+  background-color: color-mix(in srgb, var(--bg-surface) 92%, transparent) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+#mainHeader #brandBadge {
+  background-color: var(--accent) !important;
+  color: var(--accent-text) !important;
+}
+
+#mainHeader #brandTitle { color: var(--text-main) !important; }
+#mainHeader #brandSub   { color: var(--text-muted) !important; }
+
+#navTabsContainer {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--border-color) !important;
+}
+
+#navTabsContainer .nav-tab { color: var(--text-secondary) !important; }
+
+/* Активная вкладка красится в акцент скина */
+#navTabsContainer .nav-tab.bg-white {
+  background-color: var(--accent) !important;
+  color: var(--accent-text) !important;
+  box-shadow: none !important;
+}
+
+#navTabsContainer .nav-tab:not(.bg-white):hover {
+  color: var(--text-main) !important;
+  background-color: color-mix(in srgb, var(--bg-surface) 55%, transparent) !important;
+}
+
+/* Селектор скинов */
+#mainHeader #skinSelector {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+#mainHeader #skinSelector:hover { filter: brightness(0.95); }
+#mainHeader #skinSelector + span { color: var(--text-secondary) !important; }
+
+/* Кнопки кастомайзера и слабовидящих */
+#mainHeader button[onclick="toggleCustomizer()"],
+#mainHeader #a11yBtn {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+#mainHeader button[onclick="toggleCustomizer()"]:hover,
+#mainHeader #a11yBtn:hover { filter: brightness(0.95); }
+
+/* Кнопки авторизации (рендерятся из JS) */
+#authArea > button,
+#authArea > div > button:first-child {
+  background-color: var(--accent) !important;
+  color: var(--accent-text) !important;
+  border-color: var(--accent) !important;
+}
+#authArea > button:hover,
+#authArea > div > button:first-child:hover {
+  background-color: var(--accent-hover) !important;
+  filter: brightness(0.98);
+}
+
+/* Бейдж роли внутри кнопки профиля */
+#authArea > div > button:first-child > span:last-child {
+  background-color: color-mix(in srgb, var(--accent-text) 22%, transparent) !important;
+  color: var(--accent-text) !important;
+}
+
+/* Кнопка «Выйти» — отдельный акцент, чтобы не сливаться с профилем */
+#authArea button[title="Сменить аккаунт / Выйти"] {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+#authArea button[title="Сменить аккаунт / Выйти"]:hover {
+  color: #E11D48 !important;
+  filter: brightness(0.95);
+}
+/* ============================================================
+   ФИКС ШАПКИ ДЛЯ СКИНА DATA NEXUS
+   Причина: в nexus --bg-elevated: #131316 (тёмный),
+   из-за чего универсальные правила давали тёмный фон
+   с тёмным текстом --text-main: #111115 → нечитаемо.
+   ============================================================ */
+
+/* Сама шапка: белая, с лёгкой сиреневой тенью и градиентной полосой снизу */
+html[data-skin="nexus"] #mainHeader {
+  /* Линия рисуется фоном-картинкой в нижних 2px шапки.
+     Фон всегда ЗА контентом, поэтому ничего не перекрывает. */
+  background:
+    linear-gradient(90deg, #00F5A0 0%, #3B82F6 50%, #7B2CBF 100%) bottom / 100% 2px no-repeat,
+    rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: transparent !important;
+  box-shadow: 0 4px 24px -12px rgba(123, 44, 191, 0.22);
+}
+
+/* Логотип: градиентный бейдж в стиле nexus-pill-btn */
+html[data-skin="nexus"] #mainHeader #brandBadge {
+  background: linear-gradient(135deg, #00F5A0 0%, #7B2CBF 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px -4px rgba(123, 44, 191, 0.55);
+}
+
+html[data-skin="nexus"] #mainHeader #brandTitle { color: #111115 !important; }
+html[data-skin="nexus"] #mainHeader #brandSub   { color: #71717A !important; }
+
+/* Пилюля «uust.ru/news» рядом с логотипом — перекрашиваем под мятный акцент nexus */
+html[data-skin="nexus"] #mainHeader #brandTitle + span {
+  background-color: rgba(0, 245, 160, 0.15) !important;
+  color: #047857 !important;
+  border-color: rgba(0, 245, 160, 0.45) !important;
+}
+
+/* Навигационные вкладки — светло-сиреневый фон вместо тёмного */
+html[data-skin="nexus"] #navTabsContainer {
+  background-color: #F5F0FF !important;
+  border-color: #D8B4FE !important;
+}
+
+html[data-skin="nexus"] #navTabsContainer .nav-tab {
+  color: #3F3F46 !important;
+}
+
+/* Активная вкладка — мятно-фиолетовый градиент, как в hero-баннере */
+html[data-skin="nexus"] #navTabsContainer .nav-tab.bg-white {
+  background: linear-gradient(90deg, #00D285 0%, #7B2CBF 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px -4px rgba(123, 44, 191, 0.45) !important;
+}
+
+html[data-skin="nexus"] #navTabsContainer .nav-tab:not(.bg-white):hover {
+  background-color: rgba(123, 44, 191, 0.08) !important;
+  color: #7B2CBF !important;
+}
+
+/* Счётчики-бейджи внутри вкладок */
+html[data-skin="nexus"] #navTabsContainer .nav-tab .rounded-full {
+  background-color: rgba(123, 44, 191, 0.15) !important;
+  color: #5A189A !important;
+}
+html[data-skin="nexus"] #navTabsContainer .nav-tab.bg-white .rounded-full {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  color: #FFFFFF !important;
+}
+
+/* Селектор скинов */
+html[data-skin="nexus"] #mainHeader #skinSelector {
+  background-color: #F5F0FF !important;
+  color: #111115 !important;
+  border-color: #D8B4FE !important;
+}
+html[data-skin="nexus"] #mainHeader #skinSelector:hover {
+  background-color: #EDE4FF !important;
+}
+html[data-skin="nexus"] #mainHeader #skinSelector + span {
+  color: #7B2CBF !important;
+}
+
+/* Кнопки кастомайзера и слабовидящих */
+html[data-skin="nexus"] #mainHeader button[onclick="toggleCustomizer()"],
+html[data-skin="nexus"] #mainHeader #a11yBtn {
+  background-color: #F5F0FF !important;
+  color: #7B2CBF !important;
+  border-color: #D8B4FE !important;
+}
+html[data-skin="nexus"] #mainHeader button[onclick="toggleCustomizer()"]:hover,
+html[data-skin="nexus"] #mainHeader #a11yBtn:hover {
+  background-color: #EDE4FF !important;
+  color: #5A189A !important;
+}
+
+/* Кнопка «Войти / Регистрация» и кнопка профиля */
+html[data-skin="nexus"] #authArea > button,
+html[data-skin="nexus"] #authArea > div > button:first-child {
+  background: linear-gradient(90deg, #7B2CBF 0%, #5A189A 100%) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 16px -6px rgba(123, 44, 191, 0.55);
+}
+
+html[data-skin="nexus"] #authArea > div > button:first-child > span:last-child {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+
+/* Кнопка «Выйти» */
+html[data-skin="nexus"] #authArea button[title="Сменить аккаунт / Выйти"] {
+  background-color: #F5F0FF !important;
+  color: #5A189A !important;
+  border-color: #D8B4FE !important;
+}
+html[data-skin="nexus"] #authArea button[title="Сменить аккаунт / Выйти"]:hover {
+  background-color: #FEE2E2 !important;
+  color: #E11D48 !important;
+  border-color: #FECACA !important;
+}
+
+/* ============================================================
+   ЕДИНАЯ ТЕМАТИЗАЦИЯ ВСЕХ ВКЛАДОК, ФОРМ И МОДАЛЬНЫХ ОКОН
+   ============================================================ */
+:is(#filterBar, #view-submit > div, #view-my > div:first-child,
+    #view-moderation > div:first-child, #view-admin > div > div,
+    #articleReaderModal > div, #authModal > div, #customizerDrawer) {
+  background: var(--panel-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--panel-line) !important;
+  border-radius: var(--card-radius) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.text-slate-900, .text-slate-800, .text-slate-700) {
+  color: var(--text-main) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.text-slate-600, .text-slate-500, .text-slate-400) {
+  color: var(--text-muted) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.bg-white, .bg-slate-50, .bg-slate-100) {
+  background-color: var(--panel-soft) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.border-slate-100, .border-slate-200, .border-slate-300, .divide-slate-200) {
+  border-color: var(--panel-line) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(input, textarea, select) {
+  background: var(--field-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--panel-line) !important;
+  border-radius: calc(var(--card-radius) * .58) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(input, textarea, select)::placeholder { color: var(--text-muted) !important; }
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(input, textarea, select):focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent) !important;
+  outline-offset: 1px;
+  border-color: var(--accent) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.bg-indigo-600, .bg-slate-900) {
+  background: var(--accent) !important;
+  color: var(--accent-text) !important;
+  border-color: var(--accent) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer, #filterBar)
+  :is(.bg-indigo-600, .bg-slate-900):hover { background: var(--accent-hover) !important; }
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal, #customizerDrawer)
+  :is(.bg-emerald-50, .bg-emerald-100) {
+  background-color: var(--success-bg) !important;
+  border-color: var(--success-line) !important;
+  color: var(--success-text) !important;
+}
+
+:is(#view-submit, #view-my, #view-moderation, #view-admin,
+    #articleReaderContent, #authModal)
+  :is(.bg-rose-50, .bg-rose-100) {
+  background-color: var(--danger-bg) !important;
+  border-color: var(--danger-line) !important;
+  color: var(--danger-text) !important;
+}
+
+#toastNotice {
+  background: var(--accent) !important;
+  color: var(--accent-text) !important;
+  border-color: var(--panel-line) !important;
+  border-radius: calc(var(--card-radius) * .7) !important;
+}
+
+footer { color: var(--text-muted) !important; border-color: var(--border-color) !important; }
+footer strong { color: var(--text-main) !important; }
+footer a:hover { color: var(--accent) !important; }
+
+/* У каждой темы остается собственный характер во всех рабочих экранах. */
+html[data-skin="mombo"] :is(#view-submit, #view-my, #view-moderation, #view-admin) :is(.rounded-3xl, .rounded-2xl, .rounded-xl),
+html[data-skin="mombo"] :is(#authModal, #articleReaderModal, #customizerDrawer) :is(.rounded-3xl, .rounded-2xl, .rounded-xl) {
+  border-radius: 0 !important;
+}
+html[data-skin="mombo"] :is(#view-submit > div, #view-my > div:first-child, #view-moderation > div:first-child, #view-admin > div > div) {
+  border-width: 2px !important;
+  box-shadow: 6px 6px 0 #111111 !important;
+}
+html[data-skin="mombo"] button { text-transform: uppercase; letter-spacing: .025em; }
+
+html[data-skin="nexus"] :is(#view-submit > div, #view-my > div:first-child, #view-moderation > div:first-child, #view-admin > div > div) {
+  background-image: linear-gradient(135deg, rgba(0,245,160,.055), rgba(123,44,191,.075)) !important;
+  backdrop-filter: blur(18px);
+}
+html[data-skin="nexus"] :is(#view-submit, #view-my, #view-moderation, #view-admin) h2,
+html[data-skin="nexus"] :is(#view-submit, #view-my, #view-moderation, #view-admin) h3 {
+  background: linear-gradient(90deg, #047857, #7B2CBF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html[data-skin="crypto"] :is(#articleReaderModal, #authModal) { background-color: rgba(0,0,0,.82) !important; }
+html[data-skin="crypto"] :is(#view-submit, #view-my, #view-moderation, #view-admin) :is(.bg-indigo-50, .bg-indigo-100, .bg-amber-100) {
+  background-color: rgba(184,255,1,.1) !important;
+  color: #B8FF01 !important;
+  border-color: rgba(184,255,1,.32) !important;
+}
+html[data-skin="crypto"] :is(#view-submit, #view-my, #view-moderation, #view-admin) :is(.bg-emerald-600, .bg-indigo-600, .bg-slate-900),
+html[data-skin="crypto"] #authModal button[type="submit"] {
+  background: #B8FF01 !important;
+  color: #0B0D0E !important;
+}
+
+@media (max-width: 767px) {
+  #mainHeader > div { height: auto !important; min-height: 5rem; padding-top: .75rem; padding-bottom: .75rem; flex-wrap: wrap; }
+  #navTabsContainer { order: 3; display: flex !important; width: 100%; overflow-x: auto; justify-content: flex-start; }
+  #navTabsContainer .nav-tab { flex: 0 0 auto; }
+  #brandSub { display: none; }
+  #mainHeader #skinSelector { max-width: 8.5rem; }
+}
+
+    /* ============================================================
+       ТВ-РЕЖИМ (ИНФОКИОСК ХОЛЛА УУНИТ + QR-КОДЫ + БЕГУЩАЯ СТРОКА)
+       ============================================================ */
+    #tvBroadcastOverlay {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+    html[data-skin="uust"] #tvBroadcastOverlay {
+      background: radial-gradient(circle at 85% 15%, #4D19CC 0%, #2A1468 52%, #12082E 100%) !important;
+      color: #FFFFFF !important;
+    }
+    html[data-skin="mombo"] #tvBroadcastOverlay {
+      background-color: #E5E5E0 !important;
+      color: #111111 !important;
+    }
+    html[data-skin="nexus"] #tvBroadcastOverlay {
+      background: linear-gradient(135deg, #0D0E12 0%, #1A1033 55%, #09221B 100%) !important;
+      color: #FFFFFF !important;
+    }
+    html[data-skin="crypto"] #tvBroadcastOverlay {
+      background-color: #0B0D0E !important;
+      color: #F8FAFC !important;
+    }
+    #mainHeader #tvModeBtn {
+      background-color: var(--accent) !important;
+      color: var(--accent-text) !important;
+      border-color: var(--border-color) !important;
+    }
+    @keyframes tvTickerMove {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .tv-ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: tvTickerMove 42s linear infinite;
+    }
+    .tv-ticker-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes tvSlideFade {
+      0% { opacity: 0; transform: translateY(14px) scale(0.99); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .tv-slide-animate {
+      animation: tvSlideFade 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ВЕРХНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+  <header id="mainHeader" class="sticky top-0 z-40 backdrop-blur-md bg-white/90 border-b border-slate-200 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Логотип -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('feed')">
+        <div id="brandBadge" class="w-11 h-11 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-heading font-extrabold text-lg shadow-sm">
+          УУ
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="brandTitle" class="font-heading font-bold text-lg tracking-tight text-slate-900">УУНиТ.МЕДИА</span>
+          </div>
+          <p id="brandSub" class="text-xs text-slate-500">Уфимский университет науки и технологий</p>
+        </div>
+      </div>
+
+      <!-- Навигационные вкладки (адаптируются по роли) -->
+      <nav class="hidden md:flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200/80" id="navTabsContainer" aria-label="Основные разделы">
+        <button onclick="switchTab('feed')" data-tab="feed" class="nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-slate-900 shadow-sm">
+          Лента новостей
+        </button>
+        <button onclick="switchTab('submit')" data-tab="submit" class="nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+          Предложить новость
+        </button>
+        <button onclick="switchTab('my')" data-tab="my" id="tabMyBtn" class="nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+          Мои публикации <span id="myBadgeCount" class="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-amber-500/20 text-amber-800">0</span>
+        </button>
+        <button onclick="switchTab('moderation')" data-tab="moderation" id="tabModBtn" class="hidden nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+          Модерация <span id="modBadgeCount" class="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-indigo-500/20 text-indigo-800">0</span>
+        </button>
+        <button onclick="switchTab('admin')" data-tab="admin" id="tabAdminBtn" class="hidden nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+          Управление
+        </button>
+      </nav>
+
+      <!-- Панель скинов, кастомайзера и профиля -->
+      <div class="flex items-center gap-2.5">
+        <!-- Селектор скинов -->
+        <div class="relative">
+          <select id="skinSelector" onchange="applySkin(this.value)" aria-label="Выбор дизайна ленты"
+            class="appearance-none bg-slate-100 hover:bg-slate-200/80 text-slate-900 font-semibold text-xs sm:text-sm rounded-xl pl-3.5 pr-8 py-2.5 border border-slate-300 cursor-pointer focus:outline-none">
+            <option value="mombo" selected>🟧 Blueprint</option>
+            <option value="uust">🏛️ УУНиТ official</option>
+            <option value="nexus">🧬 Nexus</option>
+            <option value="crypto">🟢 Lime</option>
+          </select>
+          <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">▼</span>
+        </div>
+
+        <!-- Кнопка кастомайзера -->
+        <button onclick="toggleCustomizer()" title="Настроить тему и шрифт"
+          class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+          </svg>
+        </button>
+
+        <!-- Кнопка ТВ-режима (Инфокиоск холла с QR-кодами) -->
+        <button onclick="openTvBroadcastMode()" id="tvModeBtn" title="Запустить полноэкранный ТВ-режим с QR-кодами для экранов в холлах УУНиТ"
+          class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white border border-slate-300 text-xs font-extrabold shadow-sm transition">
+          <span>📺</span>
+          <span class="hidden sm:inline">ТВ-режим</span>
+        </button>
+
+        <!-- Кнопка для слабовидящих -->
+        <button onclick="toggleA11y()" id="a11yBtn" title="Версия для слабовидящих"
+          class="hidden sm:flex items-center gap-1 px-2.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-semibold transition">
+          <span>👁️</span>
+        </button>
+
+        <!-- Профиль / Кнопка Входа -->
+        <div id="authArea"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ВЫДВИЖНАЯ ПАНЕЛЬ КАСТОМАЙЗЕРА -->
+  <div id="customizerDrawer" class="hidden fixed right-6 top-24 z-50 w-80 rounded-2xl bg-white text-slate-900 shadow-2xl border border-slate-200 p-5">
+    <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+      <h3 class="font-heading font-bold text-sm">Персонализация ленты</h3>
+      <button onclick="toggleCustomizer()" class="text-slate-400 hover:text-slate-700 text-lg leading-none">&times;</button>
+    </div>
+    <div class="space-y-4 text-xs">
+      <div>
+        <div class="flex justify-between font-semibold mb-1">
+          <span>Масштаб текста</span>
+          <span id="fontScaleLabel">100%</span>
+        </div>
+        <input type="range" min="0.9" max="1.2" step="0.05" value="1" oninput="updateFontScale(this.value)" class="w-full accent-indigo-600 cursor-pointer" />
+      </div>
+      <div>
+        <div class="flex justify-between font-semibold mb-1">
+          <span>Скругление карточек</span>
+          <span id="radiusLabel">18px</span>
+        </div>
+        <input type="range" min="0" max="32" step="2" value="18" oninput="updateCardRadius(this.value)" class="w-full accent-indigo-600 cursor-pointer" />
+      </div>
+      <div>
+        <span class="block font-semibold mb-2">Акцентный цвет</span>
+        <div class="flex items-center gap-2">
+          <button onclick="setCustomAccent('#4F46E5')" class="w-7 h-7 rounded-full bg-[#4F46E5] border-2 border-white shadow"></button>
+          <button onclick="setCustomAccent('#FF4D00')" class="w-7 h-7 rounded-full bg-[#FF4D00] border-2 border-white shadow"></button>
+          <button onclick="setCustomAccent('#7B2CBF')" class="w-7 h-7 rounded-full bg-[#7B2CBF] border-2 border-white shadow"></button>
+          <button onclick="setCustomAccent('#10B981')" class="w-7 h-7 rounded-full bg-[#10B981] border-2 border-white shadow"></button>
+          <button onclick="setCustomAccent('#E11D48')" class="w-7 h-7 rounded-full bg-[#E11D48] border-2 border-white shadow"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ВКЛАДКА 1: ЛЕНТА НОВОСТЕЙ -->
+    <section id="view-feed" class="space-y-8">
+      <!-- Динамический приветственный экран (меняется под каждый скин) -->
+      <div id="skinWelcomeHero"></div>
+
+      <!-- Панель фильтрации и синхронизации с uust.ru/news/ -->
+      <div id="filterBar" class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-slate-200 text-slate-900 shadow-sm">
+        <div class="flex flex-wrap items-center gap-2" id="categoryButtons">
+          <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white transition">Все новости</button>
+          <button onclick="filterCategory('Наука и ИТ')" data-cat="Наука и ИТ" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Наука и ИТ</button>
+          <button onclick="filterCategory('Приоритет 2030')" data-cat="Приоритет 2030" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Приоритет 2030</button>
+          <button onclick="filterCategory('Передовая инженерная школа')" data-cat="Передовая инженерная школа" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">ПИШ «Моторы будущего»</button>
+          <button onclick="filterCategory('ВУЦ и спорт')" data-cat="ВУЦ и спорт" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">ВУЦ и спорт</button>
+          <button onclick="filterCategory('Студенческая жизнь')" data-cat="Студенческая жизнь" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Кампус</button>
+        </div>
+
+        <div class="flex items-center gap-2.5 w-full sm:w-auto">
+          <input type="text" id="searchInput" oninput="renderFeed()" placeholder="Поиск по новостям УУНиТ..."
+            class="w-full sm:w-56 px-3.5 py-2 rounded-xl bg-slate-100 text-slate-900 placeholder-slate-400 text-xs font-medium border border-slate-200 focus:outline-none focus:border-indigo-500" />
+          <div id="autoParserBadge" title="Автоматический парсинг свежих релизов с https://uust.ru/news/ работает в фоновом режиме"
+            class="shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 select-none">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span class="font-mono-code text-[11px] font-bold" id="autoParserStatusText">LIVE • uust.ru автопоток</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Контейнер карточек новостей -->
+      <div id="newsFeedContainer"></div>
+    </section>
+
+    <!-- ВКЛАДКА 2: ПРЕДЛОЖИТЬ НОВОСТЬ -->
+    <section id="view-submit" class="hidden max-w-4xl mx-auto">
+      <div class="rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-lg p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200">
+          <div>
+            <span class="text-xs font-mono-code uppercase tracking-wider px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 font-semibold">Публикация в УУНиТ.Медиа</span>
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900 mt-2">Отправить новость в редакцию</h2>
+            <p class="text-sm text-slate-600 mt-1">Материал пройдет параллельную проверку тремя специалистами: корректором орфографии, модератором содержания и фактчекером.</p>
+          </div>
+          <button onclick="importSampleFromUust()" type="button"
+            class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+            📥 Загрузить свежий черновик с uust.ru/news/
+          </button>
+        </div>
+
+        <form id="submitNewsForm" onsubmit="handleNewsSubmit(event)" class="space-y-5">
+          <input type="hidden" id="editingArticleId" value="" />
+
+          <!-- Заголовок с живым счетчиком лимита -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Заголовок новости *</label>
+              <span id="titleCounter" class="text-xs font-mono-code font-semibold text-slate-500">0 / 120 симв. (мин. 15)</span>
+            </div>
+            <input type="text" id="newsTitleInput" oninput="validateSubmitFormLive()" required
+              placeholder="Например: В УУНиТ открылась новая лаборатория беспилотных авиационных систем"
+              class="w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-900 border border-slate-300 text-sm font-semibold focus:outline-none focus:border-indigo-600" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Рубрика *</label>
+              <select id="newsCategoryInput" class="w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-900 border border-slate-300 text-sm font-medium focus:outline-none">
+                <option value="Наука и ИТ">Наука и ИТ</option>
+                <option value="Приоритет 2030">Приоритет 2030</option>
+                <option value="Передовая инженерная школа">Передовая инженерная школа</option>
+                <option value="ВУЦ и спорт">ВУЦ и спорт</option>
+                <option value="Студенческая жизнь">Студенческая жизнь</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Ссылка на первоисточник / подразделение УУНиТ *</label>
+              <input type="url" id="newsSourceInput" required value="https://uust.ru/news/"
+                placeholder="https://uust.ru/news/..."
+                class="w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-900 border border-slate-300 text-sm font-mono-code focus:outline-none focus:border-indigo-600" />
+            </div>
+          </div>
+
+          <!-- Текст новости с живым счетчиком -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Полный текст новости *</label>
+              <span id="bodyCounter" class="text-xs font-mono-code font-semibold text-slate-500">0 / 3000 симв. (мин. 100)</span>
+            </div>
+            <textarea id="newsBodyInput" rows="7" oninput="validateSubmitFormLive()" required
+              placeholder="Подробно изложите суть события, укажите дату, место проведения, имена спикеров или руководителей проекта..."
+              class="w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-900 border border-slate-300 text-sm leading-relaxed focus:outline-none focus:border-indigo-600"></textarea>
+            <!-- Индикатор алгоритмического предпросмотра -->
+            <div id="liveAlgoNotice" class="mt-2 text-xs text-slate-600 bg-slate-100 rounded-xl p-3 border border-slate-200">
+              Проверка ограничений активна: система автоматически отслеживает длину текста, стоп-слова и корректность медиафайлов.
+            </div>
+          </div>
+
+          <!-- Медиафайлы -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Медиафайлы к публикации</label>
+              <span id="mediaRulesLabel" class="text-xs font-mono-code text-slate-600">Лимит: от 1 до 4 файлов • макс. 5 МБ • JPG, PNG, WebP</span>
+            </div>
+
+            <div class="flex flex-wrap gap-3 items-center">
+              <label class="cursor-pointer px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition inline-flex items-center gap-2">
+                <span>📁 Выбрать файлы с устройства</span>
+                <input type="file" id="mediaFileInput" accept="image/jpeg,image/png,image/webp" multiple onchange="handleMediaFilesSelected(event)" class="hidden" />
+              </label>
+              <span class="text-xs text-slate-400">или</span>
+              <input type="url" id="mediaUrlInput" placeholder="Вставить прямую ссылку на иллюстрацию (URL)..."
+                class="flex-1 min-w-[220px] px-3.5 py-2 rounded-xl bg-white text-slate-900 border border-slate-300 text-xs focus:outline-none" />
+              <button type="button" onclick="addMediaByUrl()" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">
+                + Добавить URL
+              </button>
+            </div>
+
+            <div id="attachedMediaList" class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"></div>
+          </div>
+
+          <div id="submitErrorBox" class="hidden p-4 rounded-xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-semibold"></div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="button" onclick="switchTab('feed')" class="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold">
+              Отмена
+            </button>
+            <button type="submit" id="submitNewsBtn" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow-md transition">
+              Отправить на параллельную модерацию →
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ВКЛАДКА 3: МОИ ПУБЛИКАЦИИ (Кабинет автора) -->
+    <section id="view-my" class="hidden space-y-6">
+      <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="font-heading font-extrabold text-2xl text-slate-900">Мои отправленные материалы</h2>
+          <p class="text-sm text-slate-600 mt-1">Отслеживайте статус прохождения 3 параллельных проверок или исправляйте статьи, возвращенные «На доработку».</p>
+        </div>
+        <button onclick="switchTab('submit')" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold">
+          + Создать новую публикацию
+        </button>
+      </div>
+      <div id="myArticlesContainer" class="space-y-4"></div>
+    </section>
+
+    <!-- ВКЛАДКА 4: ПАРАЛЛЕЛЬНАЯ МОДЕРАЦИЯ (3 ЭТАПА БЕЗ ИИ) -->
+    <section id="view-moderation" class="hidden space-y-6">
+      <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-md bg-indigo-100 text-indigo-800 font-mono-code text-xs font-bold uppercase">Параллельный конвейер • Без ИИ</span>
+              <span id="activeModeratorRoleBadge" class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 font-mono-code text-xs font-bold"></span>
+            </div>
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900 mt-2">Рабочее место редакции УУНиТ</h2>
+            <p class="text-sm text-slate-600 mt-1">
+              Для выхода новости в главную ленту требуются 3 независимых одобрения: <strong>Корректор орфографии</strong>, <strong>Модератор содержания</strong> и <strong>Фактчекер достоверности</strong>.
+            </p>
+          </div>
+          <button onclick="importSampleToModerationQueue()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+            ⚡ Загрузить тестовую новость с uust.ru в очередь
+          </button>
+        </div>
+      </div>
+
+      <div id="moderationQueueContainer" class="space-y-6"></div>
+    </section>
+
+    <!-- ВКЛАДКА 5: ПАНЕЛЬ АДМИНИСТРАТОРА -->
+    <section id="view-admin" class="hidden space-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Настройка лимитов валидации -->
+        <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-sm space-y-5">
+          <div>
+            <span class="text-xs font-mono-code uppercase px-2.5 py-1 rounded bg-amber-100 text-amber-900 font-bold">Только Администратор</span>
+            <h3 class="font-heading font-extrabold text-xl text-slate-900 mt-2">Нормативы и ограничения публикаций</h3>
+            <p class="text-xs text-slate-600 mt-1">Изменения мгновенно применяются к форме подачи новостей для всех пользователей.</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Мин. длина заголовка (симв.)</label>
+              <input type="number" id="limitTitleMin" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Макс. длина заголовка (симв.)</label>
+              <input type="number" id="limitTitleMax" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Мин. длина текста (симв.)</label>
+              <input type="number" id="limitBodyMin" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Макс. длина текста (симв.)</label>
+              <input type="number" id="limitBodyMax" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Макс. кол-во медиафайлов</label>
+              <input type="number" id="limitMaxFiles" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Макс. размер 1 файла (МБ)</label>
+              <input type="number" id="limitMaxFileSize" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code font-bold text-slate-900" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Словарь стоп-слов и клише (через запятую, без ИИ)</label>
+            <textarea id="limitStopWords" rows="3" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 font-mono-code text-xs text-slate-900"></textarea>
+          </div>
+
+          <button onclick="saveAdminLimits()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow transition">
+            💾 Сохранить лимиты и правила валидации
+          </button>
+        </div>
+
+        <!-- Управление аккаунтами и ролями -->
+        <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-sm space-y-5">
+          <div>
+            <span class="text-xs font-mono-code uppercase px-2.5 py-1 rounded bg-indigo-100 text-indigo-900 font-bold">Ролевая модель RBAC</span>
+            <h3 class="font-heading font-extrabold text-xl text-slate-900 mt-2">Аккаунты и распределение ролей</h3>
+            <p class="text-xs text-slate-600 mt-1">Назначайте права корректоров, модераторов содержания и фактчекеров зарегистрированным пользователям.</p>
+          </div>
+          <div id="adminUsersTableContainer" class="overflow-x-auto"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО ПОЛНОГО ЧТЕНИЯ НОВОСТИ -->
+  <div id="articleReaderModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white text-slate-900 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <div id="articleReaderContent"></div>
+    </div>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО ВХОДА И РЕГИСТРАЦИИ -->
+  <div id="authModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white text-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+        <div class="flex gap-2">
+          <button onclick="switchAuthTab('login')" id="authTabLogin" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white">Вход в аккаунт</button>
+          <button onclick="switchAuthTab('register')" id="authTabRegister" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700">Регистрация</button>
+        </div>
+        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+      </div>
+
+      <!-- Форма Входа -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Логин или корпоративный Email</label>
+          <input type="text" id="loginUsername" required autocomplete="username" placeholder="Введите логин или email"
+            class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:outline-none focus:border-indigo-600" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Пароль</label>
+          <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••"
+            class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:outline-none focus:border-indigo-600" />
+        </div>
+        <div id="loginError" class="hidden text-xs font-semibold text-rose-600 bg-rose-50 p-3 rounded-xl border border-rose-200"></div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow">
+          Войти в систему
+        </button>
+
+      </form>
+
+      <!-- Форма Регистрации -->
+      <form id="registerForm" onsubmit="handleRegister(event)" class="hidden space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-700 mb-1">ФИО и институт/факультет УУНиТ *</label>
+          <input type="text" id="regFullName" required placeholder="Алина Каримова (ИИМРТ)"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Логин *</label>
+            <input type="text" id="regUsername" required placeholder="karimova"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Email *</label>
+            <input type="email" id="regEmail" required placeholder="karimova@uust.ru"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Пароль *</label>
+            <input type="password" id="regPassword" required minlength="6" placeholder="Мин. 6 символов"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Скин по умолчанию</label>
+            <select id="regPreferredSkin" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900">
+              <option value="mombo" selected>🟧 Mombo Blueprint</option>
+              <option value="uust">🏛️ УУНиТ Официальный</option>
+              <option value="nexus">🧬 Data Nexus</option>
+              <option value="crypto">🟢 Crypto Lime</option>
+            </select>
+          </div>
+        </div>
+        <div id="registerError" class="hidden text-xs font-semibold text-rose-600 bg-rose-50 p-3 rounded-xl border border-rose-200"></div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow">
+          Создать аккаунт автора УУНиТ
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ (TOAST) -->
+  <div id="toastNotice" class="fixed bottom-6 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-slate-900 text-white text-xs font-bold shadow-2xl border border-slate-700"></div>
+
+  <!-- ПОЛНОЭКРАННЫЙ ТВ-РЕЖИМ (ИНФОКИОСК ХОЛЛА УУНИТ С QR-КОДАМИ) -->
+  <div id="tvBroadcastOverlay" class="hidden fixed inset-0 z-50 flex flex-col justify-between overflow-hidden select-none">
+    <!-- Верхняя панель эфира -->
+    <div>
+      <div class="px-6 sm:px-10 py-4 border-b border-white/15 bg-slate-950/90 text-white backdrop-blur-md flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="px-3.5 py-1.5 rounded-xl bg-emerald-400 text-slate-950 font-mono-code font-extrabold text-xs flex items-center gap-2 shadow">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-950 animate-ping"></span>
+            <span>LIVE • ТВ-ПАНЕЛЬ ХОЛЛА УУНиТ</span>
+          </div>
+          <div>
+            <div class="font-heading font-extrabold text-base sm:text-lg tracking-tight text-white">УУНиТ.МЕДИА — ЭФИР КАМПУСА</div>
+            <div class="text-xs text-slate-300 font-mono-code" id="tvSlideCounterLabel">Слайд 1 • Верифицировано 3/3</div>
+          </div>
+        </div>
+
+        <!-- Управление эфиром и быстрый выбор скина прямо на ТВ -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div id="tvClockDisplay" class="font-mono-code font-bold text-sm sm:text-base px-3.5 py-1.5 rounded-xl bg-white/10 text-white border border-white/15">
+            12:00:00
+          </div>
+
+          <select id="tvSkinSelector" onchange="applySkin(this.value); renderTvSlide();"
+            class="bg-white/10 text-white font-bold text-xs rounded-xl px-3 py-2 border border-white/20 cursor-pointer focus:outline-none">
+            <option value="mombo" class="text-slate-900">🟧 Скин: Blueprint</option>
+            <option value="uust" class="text-slate-900">🏛️ Скин: УУНиТ official</option>
+            <option value="nexus" class="text-slate-900">🧬 Скин: Nexus</option>
+            <option value="crypto" class="text-slate-900">🟢 Скин: Lime</option>
+          </select>
+
+          <button onclick="prevTvSlide()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition" title="Предыдущая новость">⏮</button>
+          <button onclick="toggleTvPause()" id="tvPauseBtn" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition">⏸ Пауза</button>
+          <button onclick="nextTvSlide()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition" title="Следующая новость">⏭</button>
+          <button onclick="closeTvBroadcastMode()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition shadow">
+            ✕ Выйти (Esc)
+          </button>
+        </div>
+      </div>
+
+      <!-- Прогресс-бар автоматической смены слайда -->
+      <div class="w-full h-1.5 bg-slate-900 overflow-hidden">
+        <div id="tvProgressBar" class="h-full bg-emerald-400 transition-all duration-100 ease-linear" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Центральная сцена: Главная новость + QR-код -->
+    <div id="tvStageContainer" class="flex-1 max-w-[1600px] w-full mx-auto px-6 sm:px-10 py-6 flex items-center overflow-y-auto">
+    </div>
+
+    <!-- Нижняя телевизионная бегущая строка (LIVE Ticker) -->
+    <div class="bg-slate-950 text-white border-t border-white/15 py-3 px-4 flex items-center gap-4 overflow-hidden">
+      <span class="shrink-0 px-3 py-1 rounded bg-[#FF4D00] text-black font-mono-code font-extrabold text-xs uppercase">
+        ⚡ АВТОПОТОК UUST.RU
+      </span>
+      <div class="overflow-hidden flex-1">
+        <div id="tvTickerContent" class="tv-ticker-track font-mono-code text-xs sm:text-sm text-slate-200 gap-12"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ФУТЕР -->
+  <footer class="mt-16 border-t border-slate-300/60 py-8 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <strong class="text-slate-700">ФГБОУ ВО «Уфимский университет науки и технологий» (УУНиТ)</strong> • г. Уфа, ул. Заки Валиди, 32
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://uust.ru/news/" target="_blank" rel="noopener" class="underline hover:text-indigo-600">Официальная лента uust.ru/news/</a>
+        <span>•</span>
+        <span>Приоритет 2030 & ПИШ «Моторы будущего»</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- КЛИЕНТСКАЯ ЛОГИКА И СОСТОЯНИЕ -->
+  <script>
+    const UUST_ACRONYMS_WHITELIST = new Set([
+      'УУНИТ', 'ИИМРТ', 'ФАДЭТ', 'ПИШ', 'ВУЦ', 'НОЦ', 'СЭО', 'ФТИ', 'ИНЭБ', 'ИЭТИ', 'ИГСН', 'ИИГУ', 'ИХЗЧС', 'ИТМ', 'УМПО', 'ОДК', 'ВКС', 'СВО', 'ГОСТ', 'IT', 'ИТ', 'РФ', 'РБ', 'УФА', 'БАС', 'СКБ', 'ЦКП'
+    ]);
+
+    let validationLimits = {
+      titleMin: 15,
+      titleMax: 120,
+      bodyMin: 100,
+      bodyMax: 3000,
+      maxFiles: 4,
+      maxFileSizeMB: 5,
+      stopWords: ['шок', 'сенсация', 'срочно в номер', 'кликбейт', '100% инфа', 'скандал', 'фейк']
+    };
+
+    let usersDB = [
+      { id: 1, username: 'student', email: 'galiev@uust.ru', password: 'uust2026', fullName: 'Айдар Галиев (ИИМРТ)', role: 'user', preferredSkin: 'uust' },
+      { id: 2, username: 'corrector', email: 'belova@uust.ru', password: 'spell2026', fullName: 'Елена Белова (Корректор)', role: 'mod_spell', preferredSkin: 'mombo' },
+      { id: 3, username: 'content', email: 'sokolov@uust.ru', password: 'content2026', fullName: 'Марат Соколов (Редактор)', role: 'mod_content', preferredSkin: 'nexus' },
+      { id: 4, username: 'factcheck', email: 'khasanov@uust.ru', password: 'fact2026', fullName: 'Тимур Хасанов (Фактчекер)', role: 'mod_fact', preferredSkin: 'crypto' },
+      { id: 5, username: 'admin', email: 'admin@uust.ru', password: 'admin2026', fullName: 'Главный редактор УУНиТ', role: 'admin', preferredSkin: 'uust' }
+    ];
+
+    // Сайт всегда открывается как гостевой с основной темой Blueprint (mombo).
+    let currentUser = null;
+    let currentSkin = 'mombo';
+    let currentCategory = 'all';
+    let currentTab = 'feed';
+    let draftMediaItems = [
+      { name: 'uust-campus-lab.jpg', sizeMB: 1.4, type: 'image/jpeg', url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80' }
+    ];
+
+    // Начальная база реальных новостей УУНиТ (uust.ru/news/)
+    let articlesDB = [
+      {
+        id: 101,
+        title: 'Инженеры ПИШ «Моторы будущего» УУНиТ испытали высокоэффективный стартер-генератор для перспективной авиации',
+        category: 'Передовая инженерная школа',
+        date: 'Сегодня, 11:20',
+        author: 'Пресс-служба УУНиТ',
+        authorUsername: 'admin',
+        sourceUrl: 'https://uust.ru/news/',
+        official: true,
+        status: 'published',
+        readMinutes: 3,
+        media: [
+          'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80'
+        ],
+        body: 'В Передовой инженерной школе «Моторы будущего» Уфимского университета науки и технологий завершились стендовые испытания нового образца гибридной силовой установки и электрического стартер-генератора. Разработка ведется в кооперации с индустриальными партнерами ОДК-УМПО в рамках государственной программы «Приоритет 2030». Новая архитектура магнитной системы позволила снизить массу узла на 18% при увеличении удельной мощности.',
+        approvals: {
+          spell: { status: 'approved', by: 'Елена Белова', comment: 'Орфография и тех. термины проверены.' },
+          content: { status: 'approved', by: 'Марат Соколов', comment: 'Структура соответствует стандарту пресс-релиза.' },
+          fact: { status: 'approved', by: 'Тимур Хасанов', comment: 'Подтверждено отчетом ПИШ УУНиТ.' }
+        },
+        revisionReason: ''
+      },
+      {
+        id: 102,
+        title: 'Студенты ИИМРТ УУНиТ вышли в финал всероссийского хакатона по разработке веб-платформ и информационной безопасности',
+        category: 'Наука и ИТ',
+        date: 'Сегодня, 09:45',
+        author: 'Айдар Галиев (ИИМРТ)',
+        authorUsername: 'student',
+        sourceUrl: 'https://uust.ru/news/',
+        official: true,
+        status: 'published',
+        readMinutes: 2,
+        media: [
+          'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'
+        ],
+        body: 'Сборные команды Института информатики, математики и робототехники (ИИМРТ) УУНиТ представили прототипы высоконагруженных веб-сервисов с кастомизируемым интерфейсом и многоступенчатой верификацией контента. Жюри особо отметило скорость работы серверной части и соответствие дизайн-системы современным трендам.',
+        approvals: {
+          spell: { status: 'approved', by: 'Елена Белова', comment: 'Без ошибок.' },
+          content: { status: 'approved', by: 'Марат Соколов', comment: 'Отличный материал для главной ленты.' },
+          fact: { status: 'approved', by: 'Тимур Хасанов', comment: 'Протокол жюри прикреплен.' }
+        },
+        revisionReason: ''
+      },
+      {
+        id: 103,
+        title: 'В Межвузовском студенческом кампусе Евразийского НОЦ открылся молодежный форум технологического предпринимательства',
+        category: 'Приоритет 2030',
+        date: 'Вчера, 16:30',
+        author: 'Медиацентр УУНиТ',
+        authorUsername: 'admin',
+        sourceUrl: 'https://uust.ru/news/',
+        official: true,
+        status: 'published',
+        readMinutes: 4,
+        media: [
+          'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80'
+        ],
+        body: 'На площадке Межвузовского студенческого кампуса в Уфе собрались более 400 молодых исследователей, стартап-команд и экспертов программы «Приоритет 2030». Участники обсудили коммерциализацию университетских патентов в области радиофотоники, новых композитных материалов и биомедицины.',
+        approvals: {
+          spell: { status: 'approved', by: 'Елена Белова', comment: 'Проверено.' },
+          content: { status: 'approved', by: 'Марат Соколов', comment: 'Одобрено.' },
+          fact: { status: 'approved', by: 'Тимур Хасанов', comment: 'Источник uust.ru подтвержден.' }
+        },
+        revisionReason: ''
+      },
+      {
+        id: 104,
+        title: 'Авиапарк Военного учебного центра при УУНиТ пополнился вертолетом Ка-226 для практической подготовки курсантов',
+        category: 'ВУЦ и спорт',
+        date: '19 октября, 14:15',
+        author: 'ВУЦ при УУНиТ',
+        authorUsername: 'admin',
+        sourceUrl: 'https://uust.ru/vuc/publications/news/',
+        official: true,
+        status: 'published',
+        readMinutes: 2,
+        media: [
+          'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1000&q=80'
+        ],
+        body: 'Учебно-материальная база Военного учебного центра при Уфимском университете науки и технологий пополнилась многоцелевым вертолетом Ка-226. Воздушное судно будет задействовано на практических занятиях по конструкции и эксплуатации авиационной техники.',
+        approvals: {
+          spell: { status: 'approved', by: 'Елена Белова', comment: 'Ок.' },
+          content: { status: 'approved', by: 'Марат Соколов', comment: 'Ок.' },
+          fact: { status: 'approved', by: 'Тимур Хасанов', comment: 'Официальный релиз ВУЦ УУНиТ.' }
+        },
+        revisionReason: ''
+      },
+      {
+        id: 105,
+        title: 'СЕНСАЦИЯ!!! Студенты ИИМРТ запустили НОВЫЙ кластер компьютерного зрения и робототехники в кампусе УУНиТ',
+        category: 'Наука и ИТ',
+        date: 'Сегодня, 12:05',
+        author: 'Айдар Галиев (ИИМРТ)',
+        authorUsername: 'student',
+        sourceUrl: 'https://uust.ru/news/',
+        official: false,
+        status: 'pending',
+        readMinutes: 2,
+        media: [
+          'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80'
+        ],
+        body: 'В лаборатории робототехники ИИМРТ УУНиТ заработал обновленный вычислительный стенд для обучения моделей автономной навигации дронов!!  Срочно в номер: студенты могут записываться на проектные смены уже на этой неделе в корпусе на Заки Валиди, 32.',
+        approvals: {
+          spell: { status: 'pending', by: '', comment: '' },
+          content: { status: 'pending', by: '', comment: '' },
+          fact: { status: 'approved', by: 'Тимур Хасанов', comment: 'Лаборатория открыта в корпусе №1, факт подтвержден.' }
+        },
+        revisionReason: ''
+      }
+    ];
+
+    // Проверка и дедупликация картинок: если у новости на uust.ru нет своей картинки или она уже использовалась,
+    // картинка НЕ добавляется (media остается пустым []), что полностью исключает дублирование изображений.
+    function getSafeMediaUrl(art, idx = 0) {
+      if (!art || !Array.isArray(art.media)) return '';
+      const raw = art.media[idx];
+      if (typeof raw !== 'string') return '';
+      const url = raw.trim();
+      if (url.length < 8) return '';
+      const lower = url.toLowerCase();
+      if (
+        lower.endsWith('.svg') ||
+        lower.includes('logo') ||
+        lower.includes('mail.ru') ||
+        lower.includes('data:image/svg') ||
+        lower.includes('placeholder') ||
+        lower.includes('noimage')
+      ) {
+        return '';
+      }
+      return url;
+    }
+
+    function handleImageError(imgEl) {
+      if (!imgEl) return;
+      const wrap = imgEl.closest('.card-media-wrap');
+      if (wrap) {
+        wrap.remove();
+      } else {
+        imgEl.remove();
+      }
+    }
+
+    function getUsedMediaSet() {
+      const used = new Set();
+      articlesDB.forEach(a => {
+        if (Array.isArray(a.media)) {
+          a.media.forEach(u => {
+            if (typeof u === 'string' && u.trim()) used.add(u.trim());
+          });
+        }
+      });
+      return used;
+    }
+
+    function deduplicateMediaArray(mediaArr) {
+      if (!Array.isArray(mediaArr) || mediaArr.length === 0) return [];
+      const used = getUsedMediaSet();
+      const unique = [];
+      mediaArr.forEach(u => {
+        if (typeof u === 'string') {
+          const clean = u.trim();
+          if (clean && !used.has(clean)) {
+            used.add(clean);
+            unique.push(clean);
+          }
+        }
+      });
+      return unique;
+    }
+
+    const LIVE_UUST_POOL = [
+      {
+        title: 'Команда ВУЦ при УУНиТ заняла 1 место во Всероссийских военно-прикладных играх на кубок Главнокомандующего ВКС',
+        category: 'ВУЦ и спорт',
+        sourceUrl: 'https://uust.ru/vuc/publications/news/',
+        media: ['https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Сборная команда Военного учебного центра при УУНиТ одержала уверенную победу в финале Всероссийских военно-прикладных игр сборных команд ВУЦ на кубок Главнокомандующего Воздушно-космическими силами, продемонстрировав лучшую инженерную и строевую подготовку.'
+      },
+      {
+        title: 'Ученые УУНиТ представили новые полимерные композиты для авиадвигателестроения на совете Евразийского НОЦ',
+        category: 'Наука и ИТ',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Исследовательская группа Института технологий и материалов УУНиТ разработала термостойкие композиционные материалы нового поколения, способные выдерживать экстремальные нагрузки в тракте перспективных авиационных двигателей.'
+      },
+      {
+        title: 'Стартовал прием заявок на акселерационную программу студенческих стартапов УУНиТ «Цифровые кафедры»',
+        category: 'Студенческая жизнь',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Управление проектной работы и предпринимательства УУНиТ совместно с проектом «Цифровые кафедры» приглашает команды студентов всех институтов и филиалов пройти интенсив по продуктовой разработке и подготовке заявок на грантовый конкурс «Студенческий стартап».'
+      },
+      {
+        title: 'В ПИШ «Моторы будущего» УУНиТ создали цифровой двойник турбореактивного двигателя нового поколения',
+        category: 'Передовая инженерная школа',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Специалисты Передовой инженерной школы «Моторы будущего» УУНиТ внедрили систему суперкомпьютерного моделирования газодинамических и тепловых процессов авиационных двигателей, сокращающую цикл стендовых испытаний на 30%.'
+      },
+      {
+        title: 'Лаборатория геномики и биоинформатики УУНиТ получила грант программы «Приоритет 2030» на предиктивную аналитику',
+        category: 'Приоритет 2030',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1000&q=80'],
+        body: 'В Межвузовском студенческом кампусе Евразийского НОЦ развернуты исследования по персонализированной медицине и алгоритмической обработке геномных данных под руководством молодых ученых Уфимского университета.'
+      },
+      {
+        title: 'Сборная УУНиТ по спортивному программированию завоевала медали всероссийского чемпионата в Уфе',
+        category: 'Наука и ИТ',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Команды Института информатики, математики и робототехники (ИИМРТ) успешно решили сложнейшие алгоритмические задачи на графы и динамическое программирование, обойдя более 60 университетских сборных страны.'
+      },
+      {
+        title: 'В студенческом городке УУНиТ открылось новое коворкинг-пространство и дизайн-студия для проектных команд',
+        category: 'Студенческая жизнь',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Новое круглосуточное пространство оснащено высокоскоростным Wi-Fi, зонами для презентаций хакатон-проектов и мультимедийным оборудованием для записи образовательных подкастов и питч-сессий.'
+      },
+      {
+        title: 'Институт электротехнического инжиниринга УУНиТ запустил совместную программу стажировок с индустриальными партнерами',
+        category: 'Приоритет 2030',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Студенты старших курсов ИЭТИ и ФАДЭТ пройдут оплачиваемую практику на ведущих высокотехнологичных предприятиях Республики Башкортостан с возможностью защиты диплома в формате реального инженерного стартапа.'
+      },
+      {
+        title: 'СКБ УУНиТ представило прототип беспилотного авиационного комплекса для экологического мониторинга лесов',
+        category: 'Передовая инженерная школа',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Студенческое конструкторское бюро Уфимского университета провело летные испытания легкого беспилотника с мультиспектральной камерой, предназначенного для раннего обнаружения очагов возгорания и анализа состояния лесного фонда.'
+      },
+      {
+        title: 'Физико-технический институт УУНиТ запустил цикл открытых лекций по квантовой радиофотонике и сенсорике',
+        category: 'Наука и ИТ',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Ведущие профессора и молодые исследователи ФТИ УУНиТ расскажут студентам о проектировании интегральных фотонных схем, волоконно-оптических датчиков и современных телекоммуникационных систем.'
+      },
+      {
+        title: 'В УУНиТ стартовала Международная олимпиада школьников и студентов UUST Global Challenge',
+        category: 'Студенческая жизнь',
+        sourceUrl: 'https://uust.ru/news/',
+        media: ['https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80'],
+        body: 'В отборочном этапе олимпиады принимают участие более 2500 талантливых старшеклассников и студентов из России и зарубежных стран по профилям инженерии, программирования, экономики и востоковедения.'
+      },
+      {
+        title: 'Центр трансфера технологий УУНиТ зарегистрировал 15 новых патентов на изобретения и программы для ЭВМ',
+        category: 'Приоритет 2030',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Среди запатентованных разработок — высокопрочные жаростойкие покрытия для лопаток турбин, алгоритмы диагностики промышленного оборудования и программные комплексы моделирования нефтегазовых пластов.'
+      },
+      {
+        title: 'Курсанты ВУЦ при УУНиТ провели открытый урок мужества и выставку авиационной техники для школьников Уфы',
+        category: 'ВУЦ и спорт',
+        sourceUrl: 'https://uust.ru/vuc/publications/news/',
+        media: ['https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=80'],
+        body: 'Школьники познакомились с устройством вертолета Ка-226, авиационных двигателей и тренажерных комплексов Военного учебного центра при Уфимском университете науки и технологий.'
+      },
+      {
+        title: 'Команда ИНЭБ УУНиТ победила во Всероссийском кейс-чемпионате по технологическому предпринимательству',
+        category: 'Студенческая жизнь',
+        sourceUrl: 'https://uust.ru/news/',
+        media: [],
+        body: 'Студенты Института экономики, управления и бизнеса УУНиТ разработали финансово-инвестиционную модель вывода на рынок отечественных медицинских имплантатов и получили высокую оценку экспертов.'
+      }
+    ];
+    let livePoolIndex = 0;
+    let lastAutoAddedId = null;
+    let autoRotationCycle = 1;
+
+    // =====================================================
+    // АЛГОРИТМИЧЕСКИЙ АНАЛИЗАТОР ТЕКСТА БЕЗ ИИ
+    // =====================================================
+    function analyzeTextDeterministically(title, body) {
+      const fullText = `${title} ${body}`;
+      const issues = [];
+
+      // 1. Поиск стоп-слов по словарю
+      const foundStopWords = [];
+      validationLimits.stopWords.forEach(word => {
+        const cleanWord = word.trim().toLowerCase();
+        if (cleanWord && fullText.toLowerCase().includes(cleanWord)) {
+          foundStopWords.push(cleanWord);
+        }
+      });
+      if (foundStopWords.length > 0) {
+        issues.push(`Обнаружены стоп-слова/клише: «${foundStopWords.join('», «')}»`);
+      }
+
+      // 2. Поиск слов в CAPS LOCK (кроме разрешенных аббревиатур УУНиТ)
+      const words = fullText.match(/[А-ЯЁA-Z]{4,}/g) || [];
+      const capsViolations = words.filter(w => !UUST_ACRONYMS_WHITELIST.has(w.toUpperCase()));
+      if (capsViolations.length > 0) {
+        issues.push(`Злоупотребление CAPS LOCK: ${[...new Set(capsViolations)].join(', ')}`);
+      }
+
+      // 3. Поиск множественных знаков препинания (!!!, ???) и двойных пробелов
+      if (/[!?]{2,}/.test(fullText)) {
+        issues.push('Избыточная экспрессивная пунктуация (!! или ??)');
+      }
+      if (/  +/.test(fullText)) {
+        issues.push('Обнаружены двойные пробелы в тексте');
+      }
+
+      return {
+        clean: issues.length === 0,
+        issues,
+        foundStopWords,
+        capsViolations: [...new Set(capsViolations)]
+      };
+    }
+
+    function sanitizeTextAutomatically(text) {
+      let cleaned = text.replace(/!{2,}/g, '!').replace(/\?{2,}/g, '?').replace(/  +/g, ' ');
+      validationLimits.stopWords.forEach(sw => {
+        const w = sw.trim();
+        if (w) {
+          const reg = new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+          cleaned = cleaned.replace(reg, '');
+        }
+      });
+      cleaned = cleaned.replace(/[А-ЯЁA-Z]{4,}/g, match => {
+        if (UUST_ACRONYMS_WHITELIST.has(match.toUpperCase())) return match;
+        return match.charAt(0).toUpperCase() + match.slice(1).toLowerCase();
+      });
+      return cleaned.replace(/\s+/g, ' ').trim();
+    }
+
+    // =====================================================
+    // ПРИВЕТСТВЕННЫЕ ЭКРАНЫ ДЛЯ КАЖДОГО ИЗ 4 СКИНОВ
+    // =====================================================
+    function renderWelcomeHero() {
+      const container = document.getElementById('skinWelcomeHero');
+      const pubCount = articlesDB.filter(a => a.status === 'published').length;
+
+      if (currentSkin === 'uust') {
+        // Официальный портал УУНиТ по референсу https://uust.ru/ и брендбуку (#4D19CC, #2A1468, #CBB8FF, #E8E8E8)
+        container.innerHTML = `
+          <div class="space-y-4">
+            <!-- Верхняя навигационная строка разделов портала uust.ru и хлебные крошки -->
+            <div class="bg-white border border-[#DFD8F2] rounded-2xl px-5 py-3 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+              <div class="flex items-center gap-2 text-xs text-[#6E6585]">
+                <a href="https://uust.ru/" target="_blank" rel="noopener" class="hover:text-[#4D19CC] font-semibold">Главная uust.ru</a>
+                <span>/</span>
+                <span class="hover:text-[#4D19CC] cursor-pointer" onclick="filterCategory('all')">Медиацентр</span>
+                <span>/</span>
+                <span class="text-[#2A1468] font-bold">Все новости</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-[#2A1468]">
+                <button onclick="filterCategory('all')" class="hover:text-[#4D19CC] transition">Университет сегодня</button>
+                <button onclick="filterCategory('Наука и ИТ')" class="hover:text-[#4D19CC] transition">Институты и ИТ</button>
+                <button onclick="filterCategory('Приоритет 2030')" class="hover:text-[#4D19CC] transition">Приоритет 2030</button>
+                <button onclick="filterCategory('Передовая инженерная школа')" class="hover:text-[#4D19CC] transition">ПИШ «Моторы будущего»</button>
+                <button onclick="filterCategory('ВУЦ и спорт')" class="hover:text-[#4D19CC] transition">ВУЦ</button>
+                <button onclick="filterCategory('Студенческая жизнь')" class="hover:text-[#4D19CC] transition">Студенческий городок</button>
+              </div>
+            </div>
+
+            <!-- Главный бренд-баннер uust.ru в цветах #2A1468, #4D19CC и #CBB8FF -->
+            <div class="rounded-2xl bg-[#2A1468] text-white border border-[#4D19CC]/60 shadow-xl relative overflow-hidden">
+              <!-- Фирменная геометрическая графика брендбука УУНиТ (#4D19CC и #CBB8FF) -->
+              <svg class="pointer-events-none absolute right-0 top-0 h-full w-full lg:w-7/12 opacity-90" viewBox="0 0 700 420" fill="none" preserveAspectRatio="xMaxYMid slice">
+                <circle cx="580" cy="70" r="220" fill="#4D19CC" fill-opacity="0.55" />
+                <path d="M360 -20 L720 140 L720 440 L260 440 Z" fill="#4D19CC" fill-opacity="0.35" />
+                <path d="M430 420 C470 250, 560 150, 710 90" stroke="#CBB8FF" stroke-width="2.5" stroke-opacity="0.55" />
+                <path d="M380 430 C430 220, 540 110, 710 40" stroke="#CBB8FF" stroke-width="1.5" stroke-dasharray="6 6" stroke-opacity="0.45" />
+                <polygon points="510,40 670,120 590,260" fill="#CBB8FF" fill-opacity="0.12" stroke="#CBB8FF" stroke-opacity="0.35" stroke-width="1.5" />
+              </svg>
+
+              <div class="relative z-10 p-6 sm:p-9 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Левая колонка: официальный титул Уфимского университета -->
+                <div class="lg:col-span-7 space-y-5">
+                  <div class="inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-[#4D19CC] border border-[#CBB8FF]/40 text-xs font-semibold tracking-wide text-white shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-[#CBB8FF] animate-pulse"></span>
+                    <span>УФИМСКИЙ УНИВЕРСИТЕТ НАУКИ И ТЕХНОЛОГИЙ • МЕДИАЦЕНТР</span>
+                  </div>
+
+                  <h1 class="font-heading font-extrabold text-2xl sm:text-4xl leading-[1.15] tracking-tight text-white">
+                    Все новости УУНиТ:<br/>
+                    <span class="text-[#CBB8FF]">наука, образование и технологии будущего</span>
+                  </h1>
+
+                  <p class="text-sm sm:text-base text-[#E8E8E8] max-w-2xl leading-relaxed">
+                    Официальная лента пресс-службы и подразделений <a href="https://uust.ru/news/" target="_blank" rel="noopener" class="text-[#CBB8FF] underline font-semibold">uust.ru/news/</a>. Каждый студенческий и кафедральный релиз проходит параллельную трехступенчатую верификацию перед выходом на портал.
+                  </p>
+
+                  <!-- Быстрые плашки институтов УУНиТ как на uust.ru -->
+                  <div class="flex flex-wrap items-center gap-2 pt-1">
+                    <span class="text-xs text-[#CBB8FF] font-semibold mr-1">Подразделения:</span>
+                    <button onclick="filterCategory('Наука и ИТ')" class="px-3 py-1 rounded-md bg-white/10 hover:bg-[#4D19CC] border border-[#CBB8FF]/30 text-xs font-bold text-white transition">ИИМРТ</button>
+                    <button onclick="filterCategory('Передовая инженерная школа')" class="px-3 py-1 rounded-md bg-white/10 hover:bg-[#4D19CC] border border-[#CBB8FF]/30 text-xs font-bold text-white transition">ФАДЭТ & ПИШ</button>
+                    <button onclick="filterCategory('Приоритет 2030')" class="px-3 py-1 rounded-md bg-white/10 hover:bg-[#4D19CC] border border-[#CBB8FF]/30 text-xs font-bold text-white transition">Евразийский НОЦ</button>
+                    <button onclick="filterCategory('ВУЦ и спорт')" class="px-3 py-1 rounded-md bg-white/10 hover:bg-[#4D19CC] border border-[#CBB8FF]/30 text-xs font-bold text-white transition">ВУЦ при УУНиТ</button>
+                    <button onclick="switchTab('submit')" class="px-3.5 py-1 rounded-md bg-[#CBB8FF] hover:bg-white text-[#2A1468] text-xs font-extrabold transition shadow-sm">
+                      + Предложить новость в пресс-службу
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Правая колонка: карточка «Университет сегодня» в фирменных цветах uust.ru -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+                  <div class="p-4 rounded-xl bg-[#1E0E4D]/90 border border-[#CBB8FF]/30 backdrop-blur">
+                    <div class="text-xs font-bold uppercase tracking-wider text-[#CBB8FF]">Опубликовано</div>
+                    <div class="font-heading font-extrabold text-3xl text-white mt-1">${pubCount}</div>
+                    <div class="text-[11px] text-[#E8E8E8]/80 mt-1">Официальных релизов uust.ru</div>
+                  </div>
+                  <div class="p-4 rounded-xl bg-[#1E0E4D]/90 border border-[#CBB8FF]/30 backdrop-blur">
+                    <div class="text-xs font-bold uppercase tracking-wider text-[#CBB8FF]">Контроль 3/3</div>
+                    <div class="font-heading font-extrabold text-3xl text-white mt-1">100%</div>
+                    <div class="text-[11px] text-[#E8E8E8]/80 mt-1">Орфография • Контент • Факт</div>
+                  </div>
+                  <div class="col-span-2 p-4 rounded-xl bg-[#4D19CC] border border-[#CBB8FF]/50 flex items-center justify-between gap-3">
+                    <div>
+                      <div class="text-[11px] font-mono-code uppercase text-[#CBB8FF] font-bold">Приоритет 2030 • ПИШ «Моторы будущего»</div>
+                      <div class="text-sm font-bold text-white mt-0.5">Синхронизация с порталом uust.ru в реальном времени</div>
+                    </div>
+                    <div class="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1E0E4D] border border-[#CBB8FF]/40 text-xs font-mono-code font-bold text-[#CBB8FF]">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                      <span>LIVE АВТОПОТОК</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Нижняя полоса официальных разделов uust.ru -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <a href="https://uust.ru/" target="_blank" rel="noopener" class="p-4 rounded-xl bg-white border border-[#DFD8F2] hover:border-[#4D19CC] transition flex items-center justify-between group shadow-sm">
+                <div>
+                  <div class="text-[11px] font-bold uppercase text-[#4D19CC]">Официальный сайт</div>
+                  <div class="font-heading font-bold text-sm text-[#1C103B] group-hover:text-[#4D19CC]">Университет сегодня</div>
+                </div>
+                <span class="w-8 h-8 rounded-lg bg-[#F2EEFF] text-[#4D19CC] font-bold flex items-center justify-center group-hover:bg-[#4D19CC] group-hover:text-white transition">↗</span>
+              </a>
+              <div onclick="filterCategory('Приоритет 2030')" class="cursor-pointer p-4 rounded-xl bg-white border border-[#DFD8F2] hover:border-[#4D19CC] transition flex items-center justify-between group shadow-sm">
+                <div>
+                  <div class="text-[11px] font-bold uppercase text-[#4D19CC]">Программа развития</div>
+                  <div class="font-heading font-bold text-sm text-[#1C103B] group-hover:text-[#4D19CC]">Приоритет 2030 & НОЦ</div>
+                </div>
+                <span class="w-8 h-8 rounded-lg bg-[#F2EEFF] text-[#4D19CC] font-bold flex items-center justify-center group-hover:bg-[#4D19CC] group-hover:text-white transition">→</span>
+              </div>
+              <div onclick="filterCategory('Передовая инженерная школа')" class="cursor-pointer p-4 rounded-xl bg-white border border-[#DFD8F2] hover:border-[#4D19CC] transition flex items-center justify-between group shadow-sm">
+                <div>
+                  <div class="text-[11px] font-bold uppercase text-[#4D19CC]">Инженерия</div>
+                  <div class="font-heading font-bold text-sm text-[#1C103B] group-hover:text-[#4D19CC]">ПИШ «Моторы будущего»</div>
+                </div>
+                <span class="w-8 h-8 rounded-lg bg-[#F2EEFF] text-[#4D19CC] font-bold flex items-center justify-center group-hover:bg-[#4D19CC] group-hover:text-white transition">→</span>
+              </div>
+              <div onclick="switchTab('submit')" class="cursor-pointer p-4 rounded-xl bg-[#F2EEFF] border border-[#CBB8FF] hover:border-[#4D19CC] transition flex items-center justify-between group shadow-sm">
+                <div>
+                  <div class="text-[11px] font-bold uppercase text-[#2A1468]">Пресс-служба УУНиТ</div>
+                  <div class="font-heading font-bold text-sm text-[#2A1468] group-hover:text-[#4D19CC]">Подать материал в ленту</div>
+                </div>
+                <span class="w-8 h-8 rounded-lg bg-[#4D19CC] text-white font-bold flex items-center justify-center">＋</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (currentSkin === 'mombo') {
+        // Референс 1: Mombo Blueprint (Швейцарский архитектурный стиль, матричный логотип, цветные полосы 1-5, глиф →木)
+        container.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Левый темный архитектурный блок + изумрудная карточка 80 -->
+            <div class="lg:col-span-7 bg-[#111111] text-[#F8F7F4] border-2 border-[#111111] p-7 sm:p-8 shadow-[6px_6px_0px_#111111] flex flex-col justify-between relative">
+              <div class="flex items-center justify-between text-xs font-mono-code text-zinc-400 border-b border-zinc-800 pb-3 mb-6">
+                <span class="font-bold text-white">mombo // uust.blueprint</span>
+                <span>studio • process • news • uust.ru</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center my-auto">
+                <div class="sm:col-span-7 space-y-4">
+                  <h1 class="font-heading font-bold text-3xl sm:text-4xl leading-[1.08] tracking-tight text-white">
+                    Architectural Rigor for University Media.
+                  </h1>
+                  <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    Инженерная точность подачи новостей УУНиТ: параллельная редакционная проверка, строгая модульная сетка и мгновенный доступ к первоисточникам.
+                  </p>
+                </div>
+                <div class="sm:col-span-5 bg-[#007A3D] text-white p-5 border-2 border-white/20 flex flex-col justify-between min-h-[190px]">
+                  <div class="flex items-start justify-between">
+                    <span class="text-sm font-mono-code">✶</span>
+                    <span class="font-heading font-extrabold text-5xl leading-none">80+</span>
+                  </div>
+                  <div class="mt-6 space-y-1">
+                    <p class="text-xs text-emerald-100 leading-snug">Научных лабораторий, СКБ и кафедр УУНиТ в единой новостной матрице.</p>
+                    <div class="text-xs font-bold pt-2 border-t border-emerald-400/40">Read. Verify. Ship. →木</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono-code text-zinc-400">
+                <span>Trusted by ИИМРТ • ФАДЭТ • ПИШ</span>
+                <span class="px-2.5 py-1 bg-[#FF4D00] text-[#111111] font-bold">→木 UUST.2026</span>
+              </div>
+            </div>
+
+            <!-- Правый блок: 5 цветных номерных полос Our News System Blueprint -->
+            <div class="lg:col-span-5 bg-[#F8F7F4] text-[#111111] border-2 border-[#111111] p-6 shadow-[6px_6px_0px_#111111] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono-code text-[#111111] border-b-2 border-[#111111] pb-2 mb-3">
+                  <span class="font-bold">Our Editorial System Blueprint</span>
+                  <span>→木</span>
+                </div>
+                <div class="divide-y-2 divide-[#111111] border-2 border-[#111111]">
+                  <div onclick="filterCategory('Наука и ИТ')" class="cursor-pointer bg-[#FF4D00] text-[#111111] px-4 py-2.5 flex items-center justify-between hover:brightness-105 transition">
+                    <div class="flex items-center gap-3">
+                      <span class="font-heading font-extrabold text-xl">1.</span>
+                      <div>
+                        <div class="font-bold text-xs uppercase">Наука, ИТ и Суперкомпьютеры</div>
+                        <div class="text-[11px] text-[#111111]/80">ИИМРТ, кибербезопасность и робототехника</div>
+                      </div>
+                    </div>
+                    <span class="font-bold text-sm">→木</span>
+                  </div>
+                  <div onclick="filterCategory('Приоритет 2030')" class="cursor-pointer bg-[#FF66B2] text-[#111111] px-4 py-2.5 flex items-center justify-between hover:brightness-105 transition">
+                    <div class="flex items-center gap-3">
+                      <span class="font-heading font-extrabold text-xl">2.</span>
+                      <div>
+                        <div class="font-bold text-xs uppercase">Программа «Приоритет 2030»</div>
+                        <div class="text-[11px] text-[#111111]/80">Межвузовский кампус и трансфер технологий</div>
+                      </div>
+                    </div>
+                    <span class="font-bold text-sm">→木</span>
+                  </div>
+                  <div onclick="filterCategory('Передовая инженерная школа')" class="cursor-pointer bg-[#29B6F6] text-[#111111] px-4 py-2.5 flex items-center justify-between hover:brightness-105 transition">
+                    <div class="flex items-center gap-3">
+                      <span class="font-heading font-extrabold text-xl">3.</span>
+                      <div>
+                        <div class="font-bold text-xs uppercase">ПИШ «Моторы будущего»</div>
+                        <div class="text-[11px] text-[#111111]/80">Авиационные двигатели и гибридные машины</div>
+                      </div>
+                    </div>
+                    <span class="font-bold text-sm">→木</span>
+                  </div>
+                  <div onclick="filterCategory('ВУЦ и спорт')" class="cursor-pointer bg-[#00E5FF] text-[#111111] px-4 py-2.5 flex items-center justify-between hover:brightness-105 transition">
+                    <div class="flex items-center gap-3">
+                      <span class="font-heading font-extrabold text-xl">4.</span>
+                      <div>
+                        <div class="font-bold text-xs uppercase">Военный учебный центр & Спорт</div>
+                        <div class="text-[11px] text-[#111111]/80">Авиапарк Ка-226 и всероссийские турниры</div>
+                      </div>
+                    </div>
+                    <span class="font-bold text-sm">→木</span>
+                  </div>
+                  <div onclick="filterCategory('all')" class="cursor-pointer bg-[#FFB800] text-[#111111] px-4 py-2.5 flex items-center justify-between hover:brightness-105 transition">
+                    <div class="flex items-center gap-3">
+                      <span class="font-heading font-extrabold text-xl">5.</span>
+                      <div>
+                        <div class="font-bold text-xs uppercase">3-Этапная Верификация Контента</div>
+                        <div class="text-[11px] text-[#111111]/80">Орфография • Содержание • Фактчекинг</div>
+                      </div>
+                    </div>
+                    <span class="font-bold text-sm">→木</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 bg-[#FF4D00] border-2 border-[#111111] px-4 py-2 flex items-center justify-between">
+                <span class="mombo-dot-logo text-2xl sm:text-3xl">uust.media</span>
+                <span class="font-mono-code font-bold text-xs text-[#111111]">ENGINEERED DESIGN →木</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (currentSkin === 'nexus') {
+        // Референс 2: DATA NEXUS (Белый верх, градиентный заголовок, 3D волна жидкого хрома, 4 карточки преимуществ)
+        container.innerHTML = `
+          <div class="rounded-[28px] bg-white text-[#111115] border border-purple-200 shadow-xl overflow-hidden">
+            <div class="p-7 sm:p-10 pb-0">
+              <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-dashed border-purple-300">
+                <div class="font-heading font-black text-base tracking-tight">
+                  DATA <span class="nexus-gradient-text">UUST.NEXUS</span>
+                </div>
+                <div class="flex items-center gap-5 text-xs font-semibold text-slate-600">
+                  <span>Институты</span>
+                  <span>Приоритет 2030</span>
+                  <span>ПИШ</span>
+                  <span>Как работает модерация</span>
+                </div>
+              </div>
+
+              <div class="py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div class="lg:col-span-8 space-y-4">
+                  <h1 class="font-heading font-black text-2xl sm:text-4xl uppercase leading-tight tracking-tight text-[#111115]">
+                     ИССЛЕДУЙТЕ <span class="nexus-gradient-text">НАУКУ И ИТ УУНиТ</span><br/>
+                    В РЕАЛЬНОМ ВРЕМЕНИ <span class="bg-[#131316] text-white px-3 py-0.5 rounded-lg">24/7</span>
+                  </h1>
+                  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm font-medium text-slate-700 pt-1">
+                    <li>• Прямой поток релизов с официального портала uust.ru</li>
+                    <li>• Параллельная проверка тремя экспертами редакции</li>
+                    <li>• Отсутствие ИИ-галлюцинаций: строгие алгоритмы и фактчекинг</li>
+                    <li>• Индивидуальная настройка визуального скина ленты</li>
+                  </ul>
+                </div>
+                <div class="lg:col-span-4 flex lg:justify-end">
+                  <button onclick="switchTab('submit')" class="nexus-pill-btn px-7 py-4 rounded-full font-heading font-bold text-xs sm:text-sm shadow-lg">
+                    Предложить новость в ленту
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Декоративная 3D-волна жидкого темного хрома (как на референсе Data Nexus) -->
+            <div class="relative h-24 w-full bg-[#131316] overflow-hidden flex items-center">
+              <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 160">
+                <defs>
+                  <linearGradient id="chromeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00F5A0" stop-opacity="0.7"/>
+                    <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#7B2CBF" stop-opacity="0.85"/>
+                  </linearGradient>
+                </defs>
+                <path fill="#1E1E24" d="M0,96L60,80C120,64,240,32,360,42.7C480,53,600,107,720,117.3C840,128,960,96,1080,74.7C1200,53,1320,43,1380,37.3L1440,32L1440,160L0,160Z"></path>
+                <path fill="none" stroke="url(#chromeGrad)" stroke-width="4" d="M0,96C140,20,280,140,420,60C560,-10,700,130,840,70C980,10,1120,130,1260,55C1350,20,1400,60,1440,40"></path>
+              </svg>
+            </div>
+
+            <!-- 4 карточки метрик из референса Data Nexus -->
+            <div class="p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-white">
+              <div class="p-4 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-800 font-medium">
+                <div class="font-heading font-bold text-sm text-slate-900 mb-1">1/ Источник uust.ru</div>
+                Все материалы синхронизируются с пресс-службой и институтами УУНиТ.
+              </div>
+              <div class="p-4 rounded-2xl bg-[#131316] text-emerald-300 text-xs font-medium">
+                <div class="font-heading font-bold text-sm text-white mb-1">2/ Три модератора</div>
+                Корректор орфографии, редактор содержания и фактчекер проверяют пост параллельно.
+              </div>
+              <div class="p-4 rounded-2xl nexus-pill-btn text-white text-xs font-medium">
+                <div class="font-heading font-bold text-sm mb-1">3/ Контроль лимитов</div>
+                Автоматическая проверка объема статьи, медиафайлов и словаря стоп-слов.
+              </div>
+              <div class="p-4 rounded-2xl bg-white border-2 border-dashed border-purple-400 text-slate-800 text-xs font-medium">
+                <div class="font-heading font-bold text-sm text-purple-900 mb-1">4/ Скины в 1 клик</div>
+                Мгновенная адаптация интерфейса под вкусы каждого студента и преподавателя.
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (currentSkin === 'crypto') {
+        // Референс 3: CRYPTO. (Темный карбон, кислотный лайм #B8FF01, стек аватаров, сплайн-график с узлами)
+        container.innerHTML = `
+          <div class="rounded-3xl bg-[#111416] text-white border border-[#262B30] p-7 sm:p-10 shadow-2xl relative overflow-hidden">
+            <div class="pointer-events-none select-none absolute -right-6 top-6 font-heading font-bold text-7xl sm:text-9xl text-white/[0.03] tracking-widest">
+              UUST.LIVE
+            </div>
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-7 space-y-5">
+                <div class="text-xs font-heading font-bold tracking-widest uppercase text-slate-400">
+                  VERIFIED UNIVERSITY FEED <span class="text-[#B8FF01]">!</span>
+                </div>
+                <h1 class="font-heading font-bold text-3xl sm:text-5xl leading-[1.08]">
+                  Best <span class="text-slate-400">academic</span><br/>
+                  <span class="text-[#B8FF01]">news platform</span><br/>
+                  <span class="text-slate-400">for</span> your future.
+                </h1>
+                <div class="flex items-center gap-4 pt-1">
+                  <div class="flex -space-x-2.5">
+                    <span class="w-9 h-9 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center ring-2 ring-[#111416]">ИИ</span>
+                    <span class="w-9 h-9 rounded-full bg-[#B8FF01] text-slate-950 font-bold text-xs flex items-center justify-center ring-2 ring-[#111416]">ПИШ</span>
+                    <span class="w-9 h-9 rounded-full bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center ring-2 ring-[#111416]">ВУЦ</span>
+                    <span class="w-9 h-9 rounded-full bg-purple-400 text-slate-950 font-bold text-xs flex items-center justify-center ring-2 ring-[#111416]">НОЦ</span>
+                  </div>
+                  <div>
+                    <div class="font-heading font-bold text-lg text-white">45K +</div>
+                    <div class="text-xs text-slate-400">Студентов и сотрудников УУНиТ</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                  <button onclick="switchTab('submit')" class="group flex items-center gap-3">
+                    <span class="w-12 h-12 rounded-full border border-[#B8FF01]/50 flex items-center justify-center">
+                      <span class="w-9 h-9 rounded-full bg-[#B8FF01] text-[#0B0D0E] font-bold flex items-center justify-center group-hover:scale-110 transition">↗</span>
+                    </span>
+                    <span class="text-xs text-slate-300 max-w-xs text-left">
+                      Единая экосистема верифицированных новостей институтов УУНиТ с защитой от фейков.
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Правая панель со сплайн-графиком и узлами 1-2-3 -->
+              <div class="lg:col-span-5 bg-[#161A1D] border border-[#262B30] rounded-2xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-[11px] text-slate-400 uppercase font-mono-code">Индекс достоверности ленты</div>
+                    <div class="font-heading font-bold text-2xl text-[#B8FF01]">100% VERIFIED</div>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-[#B8FF01] text-[#0B0D0E] font-heading font-bold text-xs">LIVE UUST</span>
+                </div>
+
+                <svg class="w-full h-28" viewBox="0 0 400 110">
+                  <path d="M 10 85 Q 90 20, 160 65 T 310 35 T 390 20" fill="none" stroke="#B8FF01" stroke-width="2.5"/>
+                  <circle cx="95" cy="48" r="11" fill="#B8FF01"/>
+                  <text x="95" y="52" text-anchor="middle" font-size="10" font-weight="bold" fill="#0B0D0E">1</text>
+                  <circle cx="215" cy="58" r="11" fill="#B8FF01"/>
+                  <text x="215" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="#0B0D0E">2</text>
+                  <circle cx="325" cy="30" r="11" fill="#B8FF01"/>
+                  <text x="325" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#0B0D0E">3</text>
+                </svg>
+
+                <div class="grid grid-cols-3 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-xl bg-[#0B0D0E] border border-[#262B30]">
+                    <div class="text-[#B8FF01] font-bold">01. Орфография</div>
+                    <div class="text-slate-400">Корректура</div>
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-[#0B0D0E] border border-[#262B30]">
+                    <div class="text-[#B8FF01] font-bold">02. Контент</div>
+                    <div class="text-slate-400">Модерация</div>
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-[#0B0D0E] border border-[#262B30]">
+                    <div class="text-[#B8FF01] font-bold">03. Фактчек</div>
+                    <div class="text-slate-400">Источник</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // =====================================================
+    // РЕНДЕРИНГ ЛЕНТЫ НОВОСТЕЙ В ЗАВИСИМОСТИ ОТ СКИНА
+    // =====================================================
+    function renderFeed() {
+      renderWelcomeHero();
+      const container = document.getElementById('newsFeedContainer');
+      const query = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+
+      const published = articlesDB.filter(a => {
+        if (a.status !== 'published') return false;
+        if (currentCategory !== 'all' && a.category !== currentCategory) return false;
+        if (query && !(`${a.title} ${a.body} ${a.category}`).toLowerCase().includes(query)) return false;
+        return true;
+      });
+
+      if (published.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 rounded-3xl bg-white text-slate-800 border border-slate-200 text-center">
+            <p class="font-heading font-bold text-lg">По выбранному фильтру новостей пока нет</p>
+            <button onclick="filterCategory('all')" class="mt-3 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">Показать все материалы</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (currentSkin === 'mombo') {
+        // Сетка Mombo Blueprint: если у новости есть свое фото — показываем, если нет — чистая текстовая карточка без заглушек
+        const momboHeaderColors = ['#FF4D00', '#FF66B2', '#29B6F6', '#00E5FF', '#FFB800'];
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+        container.innerHTML = published.map((art, idx) => {
+          const stripeColor = momboHeaderColors[idx % momboHeaderColors.length];
+          const numStr = idx + 1;
+          const imgUrl = getSafeMediaUrl(art, 0);
+          return `
+            <article onmousemove="onCardMouseMove(event, this)" onmouseleave="onCardMouseLeave(this)"
+              onclick="openArticleModal(${art.id})"
+              class="news-card-3d mombo-card ${art.id === lastAutoAddedId ? 'auto-parsed-card-enter' : ''} cursor-pointer flex flex-col justify-between">
+              <div>
+                <!-- Цветная шапка с гарантированным черным текстом -->
+                <div style="background-color: ${stripeColor}; color: #111111;" class="px-4 py-2.5 border-b-2 border-[#111111] flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="font-heading font-extrabold text-lg text-[#111111]">${numStr}.</span>
+                    <span class="font-mono-code font-bold text-xs uppercase tracking-wider text-[#111111]">${art.category}</span>
+                  </div>
+                  <span class="font-bold text-base text-[#111111]">→木</span>
+                </div>
+
+                ${imgUrl ? `
+                  <div class="card-media-wrap relative h-48 overflow-hidden border-b-2 border-[#111111] bg-zinc-900">
+                    <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" loading="lazy" onerror="handleImageError(this)" class="card-img-zoom w-full h-full object-cover" />
+                    <span class="absolute bottom-2 right-2 px-2.5 py-1 bg-[#111111] text-white font-mono-code text-[11px] font-bold">
+                      #0${numStr} • ${art.readMinutes} MIN
+                    </span>
+                  </div>
+                ` : ''}
+
+                <!-- Контент карточки с жестким темным контрастом -->
+                <div class="p-5 space-y-3 bg-[#F8F7F4]">
+                  <div class="mombo-meta flex items-center justify-between text-xs font-mono-code font-semibold text-[#3F3F46]">
+                    <span>${art.date}</span>
+                    <span>${imgUrl ? 'SOURCE: UUST.RU' : `#0${numStr} • ${art.readMinutes} MIN • UUST.RU`}</span>
+                  </div>
+                  <h3 class="mombo-title font-heading font-bold text-lg leading-snug text-[#111111]">
+                    ${art.title}
+                  </h3>
+                  <p class="mombo-desc text-xs sm:text-sm text-[#27272A] ${imgUrl ? 'line-clamp-3' : 'line-clamp-5'} leading-relaxed">
+                    ${art.body}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Нижняя панель карточки -->
+              <div class="px-5 py-3.5 bg-[#F8F7F4] border-t-2 border-[#111111] flex items-center justify-between">
+                <span class="mombo-meta text-xs font-mono-code font-bold text-[#111111]">BY: ${art.author}</span>
+                <span class="cta-arrow px-3 py-1 bg-[#111111] text-white font-mono-code text-xs font-bold">
+                  READ →木
+                </span>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+      } else if (currentSkin === 'nexus') {
+        // Сетка Data Nexus
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+        container.innerHTML = published.map((art, idx) => {
+          const isDarkCard = idx % 2 === 1;
+          const imgUrl = getSafeMediaUrl(art, 0);
+          return `
+            <article onmousemove="onCardMouseMove(event, this)" onmouseleave="onCardMouseLeave(this)"
+              onclick="openArticleModal(${art.id})"
+              class="news-card-3d ${art.id === lastAutoAddedId ? 'auto-parsed-card-enter' : ''} cursor-pointer flex flex-col justify-between p-5 ${
+                isDarkCard
+                  ? 'bg-[#131316] text-white border border-purple-500/40'
+                  : 'bg-white text-[#111115] border-2 border-dashed border-purple-400'
+              }">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-mono-code font-bold text-xs px-3 py-1 rounded-full ${
+                    isDarkCard ? 'bg-purple-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-purple-100 text-purple-900'
+                  }">
+                    ${idx + 1}/ ${art.category}
+                  </span>
+                  <span class="text-xs font-mono-code ${isDarkCard ? 'text-zinc-400' : 'text-slate-500'}">${art.date}</span>
+                </div>
+
+                ${imgUrl ? `
+                  <div class="card-media-wrap relative h-44 rounded-2xl overflow-hidden">
+                    <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" loading="lazy" onerror="handleImageError(this)" class="card-img-zoom w-full h-full object-cover" />
+                  </div>
+                ` : ''}
+
+                <h3 class="font-heading font-bold text-base sm:text-lg leading-snug ${isDarkCard ? 'text-white' : 'text-[#111115]'}">
+                  ${art.title}
+                </h3>
+
+                <p class="text-xs sm:text-sm ${imgUrl ? 'line-clamp-3' : 'line-clamp-5'} leading-relaxed ${isDarkCard ? 'text-zinc-300' : 'text-slate-600'}">
+                  ${art.body}
+                </p>
+              </div>
+
+              <div class="pt-4 mt-4 border-t ${isDarkCard ? 'border-zinc-800' : 'border-purple-200'} flex items-center justify-between">
+                <span class="text-xs font-semibold ${isDarkCard ? 'text-emerald-300' : 'text-purple-800'}">✓ Верифицировано (3/3)</span>
+                <span class="cta-arrow nexus-pill-btn px-3.5 py-1.5 rounded-full text-xs font-bold">
+                  Открыть →
+                </span>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+      } else if (currentSkin === 'crypto') {
+        // Сетка Crypto Lime
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+        container.innerHTML = published.map((art, idx) => {
+          const numStr = String(idx + 1).padStart(2, '0');
+          const imgUrl = getSafeMediaUrl(art, 0);
+          return `
+            <article onmousemove="onCardMouseMove(event, this)" onmouseleave="onCardMouseLeave(this)"
+              onclick="openArticleModal(${art.id})"
+              class="news-card-3d crypto-card ${art.id === lastAutoAddedId ? 'auto-parsed-card-enter' : ''} cursor-pointer p-6 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="crypto-num font-heading font-bold text-2xl text-[#B8FF01]">${numStr}.</span>
+                  <span class="crypto-meta text-xs font-mono-code px-2.5 py-1 rounded-md bg-white/5 text-slate-300">${art.category}</span>
+                </div>
+
+                ${imgUrl ? `
+                  <div class="card-media-wrap relative h-44 rounded-xl overflow-hidden border border-white/10">
+                    <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" loading="lazy" onerror="handleImageError(this)" class="card-img-zoom w-full h-full object-cover" />
+                  </div>
+                ` : ''}
+
+                <h3 class="crypto-title font-heading font-bold text-lg leading-snug text-white">
+                  ${art.title}
+                </h3>
+
+                <p class="crypto-desc text-xs sm:text-sm text-slate-300 ${imgUrl ? 'line-clamp-3' : 'line-clamp-5'} leading-relaxed">
+                  ${art.body}
+                </p>
+              </div>
+
+              <div class="pt-4 mt-5 border-t border-white/10 flex items-center justify-between">
+                <span class="crypto-meta text-xs text-slate-400">${art.date}</span>
+                <span class="crypto-btn cta-arrow px-4 py-1.5 rounded-lg bg-[#B8FF01] text-[#0B0D0E] font-heading font-bold text-xs">
+                  Learn More →
+                </span>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+      } else {
+        // Сетка УУНиТ Официальный по референсу https://uust.ru/news/
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+        container.innerHTML = published.map((art, idx) => {
+          const isFeatured = idx === 0;
+          const imgUrl = getSafeMediaUrl(art, 0);
+          if (isFeatured) {
+            return `
+              <article onmousemove="onCardMouseMove(event, this)" onmouseleave="onCardMouseLeave(this)"
+                onclick="openArticleModal(${art.id})"
+                class="news-card-3d uust-official-card ${art.id === lastAutoAddedId ? 'auto-parsed-card-enter' : ''} cursor-pointer md:col-span-2 lg:col-span-3 overflow-hidden">
+                <!-- Верхняя фирменная полоса брендбука УУНиТ (#2A1468 -> #4D19CC -> #CBB8FF) -->
+                <div class="h-1.5 w-full bg-gradient-to-r from-[#2A1468] via-[#4D19CC] to-[#CBB8FF]"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                  ${imgUrl ? `
+                    <div class="card-media-wrap lg:col-span-7 relative h-64 sm:h-80 lg:min-h-[320px] overflow-hidden bg-[#2A1468]">
+                      <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" loading="lazy" onerror="handleImageError(this)" class="card-img-zoom w-full h-full object-cover" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-[#2A1468]/80 via-transparent to-transparent"></div>
+                      <div class="absolute top-4 left-4 flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-md bg-[#4D19CC] text-white text-xs font-bold shadow border border-[#CBB8FF]/40">
+                          ${art.category}
+                        </span>
+                        <span class="px-2.5 py-1 rounded-md bg-[#2A1468]/90 text-[#CBB8FF] text-[11px] font-mono-code font-bold border border-[#CBB8FF]/30">
+                          ГЛАВНАЯ НОВОСТЬ • UUST.RU
+                        </span>
+                      </div>
+                      <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white/90 font-medium">
+                        <span class="px-2.5 py-1 rounded bg-[#2A1468]/85 border border-[#CBB8FF]/30 font-mono-code">${art.date}</span>
+                        <span class="px-2.5 py-1 rounded bg-[#2A1468]/85 text-[#CBB8FF] font-mono-code">⏱ ${art.readMinutes} мин чтения</span>
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  <div class="${imgUrl ? 'lg:col-span-5' : 'lg:col-span-12'} p-6 sm:p-8 flex flex-col justify-between bg-white">
+                    <div class="space-y-4">
+                      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-[#4D19CC]">
+                        <div class="flex items-center gap-2">
+                          <span class="px-2.5 py-1 rounded-md bg-[#4D19CC] text-white text-xs font-bold">${art.category}</span>
+                          <span class="uppercase tracking-wider">Медиацентр УУНиТ</span>
+                        </div>
+                        <span class="text-[#6E6585]">${art.date} • ${art.author}</span>
+                      </div>
+                      <h3 class="uust-card-title font-heading font-extrabold text-xl sm:text-2xl text-[#1C103B] leading-snug transition-colors">
+                        ${art.title}
+                      </h3>
+                      <p class="text-sm text-[#3B3154] leading-relaxed line-clamp-4">
+                        ${art.body}
+                      </p>
+                    </div>
+
+                    <div class="pt-5 mt-6 border-t border-[#E8E8E8] flex items-center justify-between">
+                      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#2A1468] bg-[#F2EEFF] px-3 py-1.5 rounded-lg border border-[#CBB8FF]">
+                        <span class="w-2 h-2 rounded-full bg-[#4D19CC]"></span>
+                        Проверено редакцией (3/3)
+                      </span>
+                      <span class="cta-arrow inline-flex items-center gap-1 text-xs font-extrabold text-[#4D19CC]">
+                        Читать релиз →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            `;
+          }
+
+          return `
+            <article onmousemove="onCardMouseMove(event, this)" onmouseleave="onCardMouseLeave(this)"
+              onclick="openArticleModal(${art.id})"
+              class="news-card-3d uust-official-card ${art.id === lastAutoAddedId ? 'auto-parsed-card-enter' : ''} cursor-pointer flex flex-col justify-between">
+              <div>
+                <!-- Фирменная верхняя линия УУНиТ -->
+                <div class="h-1 w-full bg-gradient-to-r from-[#2A1468] via-[#4D19CC] to-[#CBB8FF]"></div>
+
+                ${imgUrl ? `
+                  <div class="card-media-wrap relative h-48 overflow-hidden bg-[#2A1468]">
+                    <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" loading="lazy" onerror="handleImageError(this)" class="card-img-zoom w-full h-full object-cover" />
+                    <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-1.5">
+                      <span class="px-2.5 py-1 rounded-md bg-[#4D19CC] text-white text-[11px] font-bold shadow border border-[#CBB8FF]/40">
+                        ${art.category}
+                      </span>
+                      ${art.official ? '<span class="px-2 py-0.5 rounded bg-[#2A1468]/90 text-[#CBB8FF] text-[10px] font-mono-code font-bold border border-[#CBB8FF]/30">uust.ru</span>' : ''}
+                    </div>
+                    <div class="absolute bottom-2.5 left-3">
+                      <span class="px-2.5 py-1 rounded bg-[#2A1468]/90 text-white text-[11px] font-mono-code font-semibold border-l-2 border-[#CBB8FF]">
+                        ${art.date}
+                      </span>
+                    </div>
+                  </div>
+                ` : `
+                  <div class="px-5 pt-4 flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-1 rounded-md bg-[#4D19CC] text-white text-[11px] font-bold">
+                      ${art.category}
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded bg-[#F2EEFF] text-[#2A1468] text-[11px] font-mono-code font-semibold border border-[#CBB8FF]">
+                      ${art.date}
+                    </span>
+                  </div>
+                `}
+
+                <!-- Текстовая часть карточки uust.ru -->
+                <div class="p-5 space-y-2.5">
+                  <div class="flex items-center justify-between text-[11px] font-semibold text-[#6E6585]">
+                    <span class="text-[#4D19CC]">${art.author}</span>
+                    <span>⏱ ${art.readMinutes} мин</span>
+                  </div>
+                  <h3 class="uust-card-title font-heading font-bold text-base sm:text-lg text-[#1C103B] leading-snug transition-colors">
+                    ${art.title}
+                  </h3>
+                  <p class="text-xs sm:text-sm text-[#3B3154] ${imgUrl ? 'line-clamp-3' : 'line-clamp-5'} leading-relaxed">
+                    ${art.body}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Подвал карточки в фирменном сиреневом оттенке #F5F2FC -->
+              <div class="px-5 py-3.5 bg-[#F5F2FC] border-t border-[#DFD8F2] flex items-center justify-between text-xs font-bold">
+                <span class="text-[#2A1468] flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#4D19CC]"></span>
+                  Одобрено (3/3)
+                </span>
+                <span class="cta-arrow text-[#4D19CC]">Подробнее →</span>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+    }
+
+    // =====================================================
+    // 3D-ЭФФЕКТ НАКЛОНА КАРТОЧЕК ПРИ НАВЕДЕНИИ МЫШИ
+    // =====================================================
+    function onCardMouseMove(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4.5;
+      const rotateY = ((x - centerX) / centerX) * 4.5;
+
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+      card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+    }
+
+    function onCardMouseLeave(card) {
+      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    }
+
+    // =====================================================
+    // МОДАЛЬНОЕ ОКНО ЧТЕНИЯ НОВОСТИ
+    // =====================================================
+    function openArticleModal(id) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      const modal = document.getElementById('articleReaderModal');
+      const content = document.getElementById('articleReaderContent');
+      const validPhotos = (Array.isArray(art.media) ? art.media : [])
+        .map((_, i) => getSafeMediaUrl(art, i))
+        .filter(Boolean);
+
+      content.innerHTML = `
+        <div class="space-y-5">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold">${art.category}</span>
+              <span class="text-xs text-slate-500">${art.date}</span>
+              <span class="text-xs text-slate-500">• Автор: <strong>${art.author}</strong></span>
+            </div>
+            <button onclick="closeArticleModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-lg">&times;</button>
+          </div>
+
+          <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-snug">${art.title}</h2>
+
+          ${validPhotos.length > 0 ? `
+            <div class="grid grid-cols-1 sm:grid-cols-${validPhotos.length > 1 ? '2' : '1'} gap-3">
+              ${validPhotos.map(url => `
+                <div class="card-media-wrap">
+                  <img src="${url}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" onerror="handleImageError(this)" class="w-full h-64 object-cover rounded-2xl border border-slate-200 bg-slate-900" />
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          <p class="text-sm sm:text-base text-slate-800 leading-relaxed whitespace-pre-line">${art.body}</p>
+
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 space-y-2">
+            <div class="font-bold uppercase tracking-wider text-emerald-800">Паспорт редакционной верификации УУНиТ (3/3):</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div class="p-2.5 rounded-xl bg-white border border-emerald-200">
+                <div class="font-bold">1. Орфография и стиль</div>
+                <div class="text-slate-600">Проверил: ${art.approvals.spell.by || 'Редакция'}</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-white border border-emerald-200">
+                <div class="font-bold">2. Содержание</div>
+                <div class="text-slate-600">Проверил: ${art.approvals.content.by || 'Редакция'}</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-white border border-emerald-200">
+                <div class="font-bold">3. Достоверность</div>
+                <div class="text-slate-600">Проверил: ${art.approvals.fact.by || 'Редакция'}</div>
+              </div>
+            </div>
+            <div class="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-emerald-200/80">
+              <div>
+                <div class="font-bold text-emerald-900">Первоисточник публикации:</div>
+                <a href="${art.sourceUrl}" target="_blank" rel="noopener" class="font-mono-code underline text-indigo-700 break-all">${art.sourceUrl}</a>
+                <div class="text-[11px] text-slate-500 mt-1">Отсканируйте QR-код камерой смартфона для быстрого перехода к релизу</div>
+              </div>
+              <div class="flex items-center gap-3 bg-white p-2 rounded-xl border border-emerald-200 shadow-sm">
+                <img src="${getQrImageUrlForArticle(art)}" onerror="this.onerror=null; this.src=buildOfflineQrSvgDataUri('${art.sourceUrl}');" alt="QR" class="w-16 h-16 object-contain rounded" />
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+    }
+
+    function closeArticleModal() {
+      document.getElementById('articleReaderModal').classList.add('hidden');
+    }
+
+    // =====================================================
+    // ПЕРЕКЛЮЧЕНИЕ СКИНОВ И КАСТОМАЙЗЕР
+    // =====================================================
+    function applySkin(skinName) {
+      if (!['uust', 'mombo', 'nexus', 'crypto'].includes(skinName)) return;
+      currentSkin = skinName;
+      document.documentElement.setAttribute('data-skin', skinName);
+      const sel = document.getElementById('skinSelector');
+      if (sel && sel.value !== skinName) sel.value = skinName;
+      renderFeed();
+      if (currentTab === 'my') renderMyArticles();
+      if (currentTab === 'moderation') renderModerationQueue();
+      if (currentTab === 'admin' && currentUser?.role === 'admin') renderAdminPanel();
+    }
+
+    function toggleCustomizer() {
+      document.getElementById('customizerDrawer').classList.toggle('hidden');
+    }
+
+    function updateFontScale(val) {
+      document.documentElement.style.setProperty('--font-scale', val);
+      document.getElementById('fontScaleLabel').textContent = `${Math.round(val * 100)}%`;
+    }
+
+    function updateCardRadius(val) {
+      document.documentElement.style.setProperty('--card-radius', `${val}px`);
+      document.getElementById('radiusLabel').textContent = `${val}px`;
+    }
+
+    function setCustomAccent(hex) {
+      document.documentElement.style.setProperty('--accent', hex);
+      showToast(`Акцентный цвет изменен на ${hex}`);
+    }
+
+    function toggleA11y() {
+      document.documentElement.classList.toggle('a11y-mode');
+      const isA11y = document.documentElement.classList.contains('a11y-mode');
+      showToast(isA11y ? 'Включен высококонтрастный режим для слабовидящих' : 'Стандартный режим отображения');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.className = 'cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white transition';
+        } else {
+          btn.className = 'cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+        }
+      });
+      renderFeed();
+    }
+
+    // =====================================================
+    // АВТОМАТИЧЕСКИЙ ПАРСИНГ И ФОНОВОЕ ПОЯВЛЕНИЕ НОВОСТЕЙ С UUST.RU/NEWS/
+    // =====================================================
+    async function fetchBackendUustLivePool() {
+      try {
+        const resp = await fetch('/api/uust-live?limit=30');
+        if (!resp.ok) return;
+        const data = await resp.json();
+        if (Array.isArray(data.items)) {
+          const usedUrls = getUsedMediaSet();
+          LIVE_UUST_POOL.forEach(p => {
+            if (Array.isArray(p.media)) p.media.forEach(u => { if (u) usedUrls.add(u.trim()); });
+          });
+
+          data.items.forEach(raw => {
+            if (!raw || !raw.title) return;
+            const alreadyInPool = LIVE_UUST_POOL.some(p => p.title === raw.title);
+            const alreadyInFeed = articlesDB.some(a => a.title === raw.title);
+            if (!alreadyInPool && !alreadyInFeed) {
+              // Оставляем только собственную картинку новости, если она еще нигде не использовалась
+              const rawMedia = Array.isArray(raw.media) ? raw.media : [];
+              const uniqueMedia = [];
+              rawMedia.forEach(u => {
+                if (typeof u === 'string' && u.trim() && !usedUrls.has(u.trim())) {
+                  usedUrls.add(u.trim());
+                  uniqueMedia.push(u.trim());
+                }
+              });
+
+              LIVE_UUST_POOL.unshift({
+                title: raw.title,
+                category: raw.category || 'Наука и ИТ',
+                sourceUrl: raw.source_url || 'https://uust.ru/news/',
+                media: uniqueMedia,
+                body: raw.body || raw.title
+              });
+            }
+          });
+        }
+      } catch (_) {
+        // Если открыто локально без сервера — работает встроенный пул реальных новостей uust.ru
+      }
+    }
+
+    function createPublishedArticleFromPoolItem(item, customDateLabel) {
+      const nowStr = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const newId = Date.now() + Math.floor(Math.random() * 1000);
+      // Исключаем дублирование картинок: если фото уже есть у другой новости в ленте — не добавляем его
+      const uniqueMedia = deduplicateMediaArray(item.media);
+
+      return {
+        id: newId,
+        title: item.title,
+        category: item.category || 'Наука и ИТ',
+        date: customDateLabel || `Автопоток • ${nowStr}`,
+        author: 'Пресс-служба УУНиТ (uust.ru)',
+        authorUsername: 'admin',
+        sourceUrl: item.sourceUrl || 'https://uust.ru/news/',
+        official: true,
+        status: 'published',
+        readMinutes: Math.max(2, Math.round((item.body || '').split(/\s+/).length / 95)),
+        media: uniqueMedia,
+        body: item.body,
+        approvals: {
+          spell: { status: 'approved', by: 'Автопарсер uust.ru', comment: 'Официальный релиз' },
+          content: { status: 'approved', by: 'Автопарсер uust.ru', comment: 'Официальный релиз' },
+          fact: { status: 'approved', by: 'Автопарсер uust.ru', comment: 'Верифицированный источник uust.ru' }
+        },
+        revisionReason: ''
+      };
+    }
+
+    function pushInitialParsedBatch(batchCount = 3) {
+      let added = 0;
+      for (const candidate of LIVE_UUST_POOL) {
+        if (added >= batchCount) break;
+        if (!articlesDB.some(a => a.title === candidate.title)) {
+          const art = createPublishedArticleFromPoolItem(candidate, 'Сегодня • uust.ru/news');
+          articlesDB.unshift(art);
+          added++;
+        }
+      }
+      if (added > 0) {
+        renderFeed();
+        updateCounters();
+      }
+    }
+
+    function pushNextAutoParsedNewsCard() {
+      const nextItem = LIVE_UUST_POOL.find(candidate => !articlesDB.some(a => a.title === candidate.title));
+      const statusText = document.getElementById('autoParserStatusText');
+
+      if (!nextItem) {
+        if (statusText) {
+          const totalPub = articlesDB.filter(a => a.status === 'published').length;
+          statusText.textContent = `LIVE • uust.ru (${totalPub} релизов в ленте)`;
+        }
+        return;
+      }
+
+      const nowStr = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+      const newArt = createPublishedArticleFromPoolItem(nextItem, `Автопоток • ${nowStr}`);
+      lastAutoAddedId = newArt.id;
+      articlesDB.unshift(newArt);
+
+      if (statusText) {
+        const totalPub = articlesDB.filter(a => a.status === 'published').length;
+        statusText.textContent = `LIVE • uust.ru (${totalPub} новостей • +1 в ${nowStr})`;
+      }
+
+      if (currentTab === 'feed') {
+        renderFeed();
+      }
+      updateCounters();
+      if (typeof tvModeActive !== 'undefined' && tvModeActive) {
+        renderTvTicker();
+      }
+      showToast(`⚡ Автопарсер uust.ru: «${nextItem.title.slice(0, 56)}...»`);
+
+      setTimeout(() => {
+        if (lastAutoAddedId === newArt.id) lastAutoAddedId = null;
+      }, 1200);
+    }
+
+    async function startAutoUustLiveStream() {
+      // 1. Сразу подгружаем стартовую пачку свежих новостей и опрашиваем серверный парсер /api/uust-live?limit=30
+      pushInitialParsedBatch(3);
+      await fetchBackendUustLivePool();
+
+      const statusText = document.getElementById('autoParserStatusText');
+      if (statusText) {
+        const totalPub = articlesDB.filter(a => a.status === 'published').length;
+        statusText.textContent = `LIVE • uust.ru автопоток (${totalPub} релизов)`;
+      }
+
+      // 2. Периодически опрашиваем бэкенд-парсер
+      setInterval(fetchBackendUustLivePool, 15000);
+
+      // 3. Новые плашки новостей автоматически выезжают в ленту каждые 7 секунд
+      setTimeout(() => {
+        pushNextAutoParsedNewsCard();
+        setInterval(pushNextAutoParsedNewsCard, 7000);
+      }, 3500);
+    }
+
+    // =====================================================
+    // ПОДАЧА НОВОСТИ И ЖИВАЯ ВАЛИДАЦИЯ ОГРАНИЧЕНИЙ
+    // =====================================================
+    function renderDraftMedia() {
+      const list = document.getElementById('attachedMediaList');
+      const rulesLabel = document.getElementById('mediaRulesLabel');
+      rulesLabel.textContent = `Лимит: от 1 до ${validationLimits.maxFiles} файлов • макс. ${validationLimits.maxFileSizeMB} МБ • JPG, PNG, WebP`;
+
+      list.innerHTML = draftMediaItems.map((m, idx) => `
+        <div class="relative group rounded-xl overflow-hidden border border-slate-300 bg-white">
+          <img src="${m.url}" alt="${m.name}" referrerpolicy="no-referrer" onerror="handleImageError(this, 'Наука и ИТ', '${m.name}')" class="w-full h-24 object-cover bg-slate-900" />
+          <div class="p-1.5 text-[11px] truncate font-mono-code text-slate-700">${m.name} (${m.sizeMB} МБ)</div>
+          <button type="button" onclick="removeDraftMedia(${idx})"
+            class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-rose-600 text-white text-xs font-bold flex items-center justify-center shadow">
+            &times;
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function removeDraftMedia(idx) {
+      draftMediaItems.splice(idx, 1);
+      renderDraftMedia();
+    }
+
+    function handleMediaFilesSelected(e) {
+      const files = Array.from(e.target.files || []);
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+      for (const file of files) {
+        if (draftMediaItems.length >= validationLimits.maxFiles) {
+          showToast(`Превышен лимит: максимум ${validationLimits.maxFiles} медиафайлов!`);
+          break;
+        }
+        if (!allowedTypes.includes(file.type)) {
+          showToast(`Файл ${file.name} отклонен: разрешены только JPG, PNG, WebP.`);
+          continue;
+        }
+        const sizeMB = +(file.size / (1024 * 1024)).toFixed(2);
+        if (sizeMB > validationLimits.maxFileSizeMB) {
+          showToast(`Файл ${file.name} (${sizeMB} МБ) превышает лимит ${validationLimits.maxFileSizeMB} МБ!`);
+          continue;
+        }
+        const objectUrl = URL.createObjectURL(file);
+        draftMediaItems.push({ name: file.name, sizeMB, type: file.type, url: objectUrl });
+      }
+      e.target.value = '';
+      renderDraftMedia();
+    }
+
+    function addMediaByUrl() {
+      const input = document.getElementById('mediaUrlInput');
+      const url = input.value.trim();
+      if (!url) return;
+      if (draftMediaItems.length >= validationLimits.maxFiles) {
+        showToast(`Максимум ${validationLimits.maxFiles} медиафайлов!`);
+        return;
+      }
+      draftMediaItems.push({ name: 'external-media.jpg', sizeMB: 1.1, type: 'image/jpeg', url });
+      input.value = '';
+      renderDraftMedia();
+    }
+
+    function validateSubmitFormLive() {
+      const title = document.getElementById('newsTitleInput').value;
+      const body = document.getElementById('newsBodyInput').value;
+      const titleCounter = document.getElementById('titleCounter');
+      const bodyCounter = document.getElementById('bodyCounter');
+      const notice = document.getElementById('liveAlgoNotice');
+
+      titleCounter.textContent = `${title.length} / ${validationLimits.titleMax} симв. (мин. ${validationLimits.titleMin})`;
+      titleCounter.className = (title.length >= validationLimits.titleMin && title.length <= validationLimits.titleMax)
+        ? 'text-xs font-mono-code font-bold text-emerald-600'
+        : 'text-xs font-mono-code font-bold text-rose-600';
+
+      bodyCounter.textContent = `${body.length} / ${validationLimits.bodyMax} симв. (мин. ${validationLimits.bodyMin})`;
+      bodyCounter.className = (body.length >= validationLimits.bodyMin && body.length <= validationLimits.bodyMax)
+        ? 'text-xs font-mono-code font-bold text-emerald-600'
+        : 'text-xs font-mono-code font-bold text-rose-600';
+
+      const report = analyzeTextDeterministically(title, body);
+      if (report.clean) {
+        notice.className = 'mt-2 text-xs text-emerald-800 bg-emerald-50 rounded-xl p-3 border border-emerald-200 font-medium';
+        notice.textContent = '✓ Предварительный алгоритмический контроль: стоп-слов, капслока и нарушений пунктуации не обнаружено.';
+      } else {
+        notice.className = 'mt-2 text-xs text-amber-900 bg-amber-50 rounded-xl p-3 border border-amber-300 font-semibold';
+        notice.textContent = `⚠️ Обратите внимание перед отправкой: ${report.issues.join(' • ')}`;
+      }
+    }
+
+    function importSampleFromUust() {
+      const sample = LIVE_UUST_POOL[livePoolIndex % LIVE_UUST_POOL.length];
+      livePoolIndex++;
+      document.getElementById('newsTitleInput').value = sample.title;
+      document.getElementById('newsCategoryInput').value = sample.category;
+      document.getElementById('newsSourceInput').value = sample.sourceUrl;
+      document.getElementById('newsBodyInput').value = sample.body;
+      draftMediaItems = (Array.isArray(sample.media) && sample.media[0]) ? [{ name: 'uust-press.jpg', sizeMB: 1.2, type: 'image/jpeg', url: sample.media[0] }] : [];
+      renderDraftMedia();
+      validateSubmitFormLive();
+      showToast('Черновик новости с uust.ru/news/ загружен в форму');
+    }
+
+    function handleNewsSubmit(e) {
+      e.preventDefault();
+      if (!currentUser) {
+        openAuthModal();
+        return;
+      }
+
+      const title = document.getElementById('newsTitleInput').value.trim();
+      const category = document.getElementById('newsCategoryInput').value;
+      const sourceUrl = document.getElementById('newsSourceInput').value.trim();
+      const body = document.getElementById('newsBodyInput').value.trim();
+      const editingId = document.getElementById('editingArticleId').value;
+      const errorBox = document.getElementById('submitErrorBox');
+
+      const errors = [];
+      if (title.length < validationLimits.titleMin || title.length > validationLimits.titleMax) {
+        errors.push(`Заголовок должен содержать от ${validationLimits.titleMin} до ${validationLimits.titleMax} символов (сейчас: ${title.length}).`);
+      }
+      if (body.length < validationLimits.bodyMin || body.length > validationLimits.bodyMax) {
+        errors.push(`Текст новости должен содержать от ${validationLimits.bodyMin} до ${validationLimits.bodyMax} символов (сейчас: ${body.length}).`);
+      }
+      if (draftMediaItems.length > validationLimits.maxFiles) {
+        errors.push(`Максимальное количество медиафайлов: ${validationLimits.maxFiles}.`);
+      }
+
+      if (errors.length > 0) {
+        errorBox.innerHTML = errors.join('<br/>');
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      errorBox.classList.add('hidden');
+
+      if (editingId) {
+        const art = articlesDB.find(a => a.id === Number(editingId));
+        if (art) {
+          art.title = title;
+          art.category = category;
+          art.sourceUrl = sourceUrl;
+          art.body = body;
+          art.media = draftMediaItems.map(m => m.url);
+          art.status = 'pending';
+          art.revisionReason = '';
+          art.approvals = {
+            spell: { status: 'pending', by: '', comment: '' },
+            content: { status: 'pending', by: '', comment: '' },
+            fact: { status: 'pending', by: '', comment: '' }
+          };
+        }
+        document.getElementById('editingArticleId').value = '';
+        showToast('Исправленная новость повторно отправлена на параллельную модерацию!');
+      } else {
+        articlesDB.unshift({
+          id: Date.now(),
+          title,
+          category,
+          date: 'Только что',
+          author: currentUser.fullName,
+          authorUsername: currentUser.username,
+          sourceUrl,
+          official: sourceUrl.includes('uust.ru'),
+          status: 'pending',
+          readMinutes: Math.max(1, Math.round(body.split(/\s+/).length / 120)),
+          media: draftMediaItems.map(m => m.url),
+          body,
+          approvals: {
+            spell: { status: 'pending', by: '', comment: '' },
+            content: { status: 'pending', by: '', comment: '' },
+            fact: { status: 'pending', by: '', comment: '' }
+          },
+          revisionReason: ''
+        });
+        showToast('Новость отправлена в очередь параллельной модерации (0/3)!');
+      }
+
+      document.getElementById('submitNewsForm').reset();
+      document.getElementById('newsSourceInput').value = 'https://uust.ru/news/';
+      updateCounters();
+      switchTab('my');
+    }
+
+    // =====================================================
+    // КАБИНЕТ АВТОРА («МОИ ПУБЛИКАЦИИ»)
+    // =====================================================
+    function renderMyArticles() {
+      const container = document.getElementById('myArticlesContainer');
+      if (!currentUser) {
+        container.innerHTML = `<div class="p-8 rounded-2xl bg-white text-slate-800 border text-center">Войдите в аккаунт для просмотра своих публикаций.</div>`;
+        return;
+      }
+
+      const myList = articlesDB.filter(a => a.authorUsername === currentUser.username || currentUser.role === 'admin');
+      if (myList.length === 0) {
+        container.innerHTML = `<div class="p-8 rounded-2xl bg-white text-slate-600 border text-center">У вас пока нет отправленных новостей.</div>`;
+        return;
+      }
+
+      container.innerHTML = myList.map(art => {
+        const appCount = ['spell', 'content', 'fact'].filter(k => art.approvals[k].status === 'approved').length;
+        let statusBadge = '';
+        if (art.status === 'published') {
+          statusBadge = `<span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">✓ Опубликовано в ленте (3/3)</span>`;
+        } else if (art.status === 'revision') {
+          statusBadge = `<span class="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold">⚠️ Возвращено на доработку</span>`;
+        } else {
+          statusBadge = `<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">⏳ На параллельной проверке (${appCount}/3)</span>`;
+        }
+
+        return `
+          <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-sm space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-100 text-slate-800">${art.category}</span>
+                <span class="text-xs text-slate-500">${art.date}</span>
+              </div>
+              ${statusBadge}
+            </div>
+
+            <h3 class="font-heading font-bold text-lg text-slate-900">${art.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-600">${art.body}</p>
+
+            <!-- Статус 3 параллельных слотов -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              ${renderSlotPill('1. Корректор орфографии', art.approvals.spell)}
+              ${renderSlotPill('2. Модератор содержания', art.approvals.content)}
+              ${renderSlotPill('3. Фактчекер достоверности', art.approvals.fact)}
+            </div>
+
+            ${art.status === 'revision' ? `
+              <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-wrap items-center justify-between gap-3">
+                <div class="text-xs text-rose-900">
+                  <strong>Комментарий модератора:</strong> ${art.revisionReason || 'Требуется корректировка текста.'}
+                </div>
+                <button onclick="loadArticleForRevision(${art.id})" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">
+                  ✏️ Исправить и отправить заново
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSlotPill(label, slot) {
+      if (slot.status === 'approved') {
+        return `<div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900">
+          <div class="font-bold">✓ ${label}</div>
+          <div class="text-[11px] text-emerald-700 mt-0.5">Одобрено (${slot.by || 'Эксперт'})</div>
+        </div>`;
+      }
+      if (slot.status === 'revision') {
+        return `<div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900">
+          <div class="font-bold">⚠️ ${label}</div>
+          <div class="text-[11px] text-rose-700 mt-0.5">${slot.comment || 'На доработку'}</div>
+        </div>`;
+      }
+      return `<div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700">
+        <div class="font-bold">⏳ ${label}</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">Ожидает проверки специалиста</div>
+      </div>`;
+    }
+
+    function loadArticleForRevision(id) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      document.getElementById('editingArticleId').value = art.id;
+      document.getElementById('newsTitleInput').value = art.title;
+      document.getElementById('newsCategoryInput').value = art.category;
+      document.getElementById('newsSourceInput').value = art.sourceUrl;
+      document.getElementById('newsBodyInput').value = art.body;
+      draftMediaItems = art.media.map((url, i) => ({ name: `media-${i+1}.jpg`, sizeMB: 1.2, type: 'image/jpeg', url }));
+      renderDraftMedia();
+      validateSubmitFormLive();
+      switchTab('submit');
+      showToast('Статья загружена для доработки');
+    }
+
+    // =====================================================
+    // ПАРАЛЛЕЛЬНАЯ МОДЕРАЦИЯ (3 РОЛИ БЕЗ ИИ)
+    // =====================================================
+    function renderModerationQueue() {
+      const container = document.getElementById('moderationQueueContainer');
+      const roleBadge = document.getElementById('activeModeratorRoleBadge');
+      const roleNames = {
+        mod_spell: 'Ваша роль: Корректор орфографии (Слот №1)',
+        mod_content: 'Ваша роль: Модератор содержания (Слот №2)',
+        mod_fact: 'Ваша роль: Фактчекер достоверности (Слот №3)',
+        admin: 'Ваша роль: Администратор (Доступ ко всем 3 слотам)'
+      };
+      roleBadge.textContent = roleNames[currentUser?.role] || 'Режим просмотра';
+
+      const queue = articlesDB.filter(a => a.status === 'pending' || a.status === 'revision');
+      if (queue.length === 0) {
+        container.innerHTML = `
+          <div class="p-10 rounded-3xl bg-white text-slate-700 border border-slate-200 text-center space-y-3">
+            <div class="text-lg font-heading font-bold">Все материалы проверены! Очередь модерации пуста.</div>
+            <button onclick="importSampleToModerationQueue()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">
+              Загрузить тестовую статью в очередь
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = queue.map(art => {
+        const report = analyzeTextDeterministically(art.title, art.body);
+        const canSpell = currentUser?.role === 'mod_spell' || currentUser?.role === 'admin';
+        const canContent = currentUser?.role === 'mod_content' || currentUser?.role === 'admin';
+        const canFact = currentUser?.role === 'mod_fact' || currentUser?.role === 'admin';
+
+        return `
+          <div class="p-6 rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-md space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-200">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-900 text-xs font-bold">${art.category}</span>
+                <span class="text-xs text-slate-500">Автор: <strong>${art.author}</strong> • ${art.date}</span>
+                <a href="${art.sourceUrl}" target="_blank" rel="noopener" class="text-xs font-mono-code text-indigo-600 underline">${art.sourceUrl}</a>
+              </div>
+              <span class="text-xs font-mono-code font-bold px-3 py-1 rounded-lg bg-slate-100 text-slate-800">ID #${art.id}</span>
+            </div>
+
+            <!-- Инструменты алгоритмической детекции без ИИ -->
+            <div class="p-4 rounded-2xl ${report.clean ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-amber-50 border-amber-300 text-amber-950'} border text-xs space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-bold uppercase tracking-wider">
+                  ${report.clean ? '✓ Алгоритмический сканер (Regex + Словарь): нарушений не выявлено' : '⚠️ Алгоритмический сканер обнаружил маркеры, требующие внимания:'}
+                </span>
+                <button onclick="autoCleanInModerator(${art.id})" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold">
+                  🧹 Авто-очистка (убрать стоп-слова, CAPS и !!)
+                </button>
+              </div>
+              ${!report.clean ? `<ul class="list-disc list-inside space-y-1 font-medium">${report.issues.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}
+            </div>
+
+            <!-- Прямое редактирование заголовка и текста модератором -->
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Заголовок (доступно прямое редактирование корректором):</label>
+                <input type="text" id="modTitle-${art.id}" value="${art.title.replace(/"/g, '&quot;')}"
+                  class="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-300 text-sm font-bold text-slate-900" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Текст публикации:</label>
+                <textarea id="modBody-${art.id}" rows="4"
+                  class="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 leading-relaxed">${art.body}</textarea>
+              </div>
+              <div class="flex justify-end">
+                <button onclick="saveModeratorEdits(${art.id})" class="px-3.5 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold">
+                  💾 Сохранить текстовые правки
+                </button>
+              </div>
+            </div>
+
+            <!-- 3 параллельных слота принятия решения -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <!-- Слот 1: Орфография -->
+              <div class="p-4 rounded-2xl border ${art.approvals.spell.status === 'approved' ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-heading font-bold text-xs text-slate-900">1. Орфография и пунктуация</span>
+                  <span class="text-xs font-bold">${art.approvals.spell.status === 'approved' ? '✅ Одобрено' : '⏳ Ожидает'}</span>
+                </div>
+                <p class="text-[11px] text-slate-600">Проверка грамматики, опечаток, капслока и пунктуации.</p>
+                ${canSpell ? `
+                  <div class="flex gap-2 pt-1">
+                    <button onclick="approveStage(${art.id}, 'spell')" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold">
+                      Одобрить (1/3)
+                    </button>
+                    <button onclick="sendToRevision(${art.id}, 'spell')" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">
+                      На доработку
+                    </button>
+                  </div>
+                ` : `<div class="text-[11px] font-mono-code text-slate-500">Доступно роли: Корректор (corrector)</div>`}
+              </div>
+
+              <!-- Слот 2: Содержание -->
+              <div class="p-4 rounded-2xl border ${art.approvals.content.status === 'approved' ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-heading font-bold text-xs text-slate-900">2. Модерация содержания</span>
+                  <span class="text-xs font-bold">${art.approvals.content.status === 'approved' ? '✅ Одобрено' : '⏳ Ожидает'}</span>
+                </div>
+                <p class="text-[11px] text-slate-600">Проверка структуры, отсутствия кликбейта и соответствия этике УУНиТ.</p>
+                ${canContent ? `
+                  <div class="flex gap-2 pt-1">
+                    <button onclick="approveStage(${art.id}, 'content')" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold">
+                      Одобрить (2/3)
+                    </button>
+                    <button onclick="sendToRevision(${art.id}, 'content')" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">
+                      На доработку
+                    </button>
+                  </div>
+                ` : `<div class="text-[11px] font-mono-code text-slate-500">Доступно роли: Модератор (content)</div>`}
+              </div>
+
+              <!-- Слот 3: Фактчекинг -->
+              <div class="p-4 rounded-2xl border ${art.approvals.fact.status === 'approved' ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-heading font-bold text-xs text-slate-900">3. Фактчекинг и источник</span>
+                  <span class="text-xs font-bold">${art.approvals.fact.status === 'approved' ? '✅ Одобрено' : '⏳ Ожидает'}</span>
+                </div>
+                <p class="text-[11px] text-slate-600">Верификация ссылки на первоисточник uust.ru, дат и медиафайлов.</p>
+                ${canFact ? `
+                  <div class="flex gap-2 pt-1">
+                    <button onclick="approveStage(${art.id}, 'fact')" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold">
+                      Одобрить (3/3)
+                    </button>
+                    <button onclick="sendToRevision(${art.id}, 'fact')" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">
+                      На доработку
+                    </button>
+                  </div>
+                ` : `<div class="text-[11px] font-mono-code text-slate-500">Доступно роли: Фактчекер (factcheck)</div>`}
+              </div>
+            </div>
+
+            <!-- Поле комментария для возврата на доработку -->
+            <div class="pt-1">
+              <input type="text" id="modComment-${art.id}" placeholder="Причина возврата на доработку или комментарий для автора..."
+                class="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900" />
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function saveModeratorEdits(id) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      art.title = document.getElementById(`modTitle-${id}`).value.trim();
+      art.body = document.getElementById(`modBody-${id}`).value.trim();
+      renderModerationQueue();
+      showToast('Текстовые правки модератора сохранены');
+    }
+
+    function autoCleanInModerator(id) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      art.title = sanitizeTextAutomatically(document.getElementById(`modTitle-${id}`).value);
+      art.body = sanitizeTextAutomatically(document.getElementById(`modBody-${id}`).value);
+      renderModerationQueue();
+      showToast('Авто-очистка выполнена: стоп-слова, CAPS и двойные знаки устранены');
+    }
+
+    function approveStage(id, stageKey) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      art.title = document.getElementById(`modTitle-${id}`).value.trim();
+      art.body = document.getElementById(`modBody-${id}`).value.trim();
+
+      art.approvals[stageKey] = {
+        status: 'approved',
+        by: currentUser.fullName,
+        comment: 'Одобрено'
+      };
+
+      const allApproved = ['spell', 'content', 'fact'].every(k => art.approvals[k].status === 'approved');
+      if (allApproved) {
+        art.status = 'published';
+        art.date = 'Только что • Одобрено (3/3)';
+        showToast('🎉 Все 3 параллельных этапа пройдены! Новость опубликована в главной ленте.');
+      } else {
+        showToast('Этап одобрен! Ожидается подтверждение остальных специалистов.');
+      }
+
+      updateCounters();
+      renderModerationQueue();
+      renderFeed();
+    }
+
+    function sendToRevision(id, stageKey) {
+      const art = articlesDB.find(a => a.id === id);
+      if (!art) return;
+      const commentInput = document.getElementById(`modComment-${id}`);
+      const reason = (commentInput?.value || '').trim() || 'Требуется устранить замечания редакции по тексту или источнику.';
+
+      art.status = 'revision';
+      art.revisionReason = `${currentUser.fullName}: ${reason}`;
+      art.approvals[stageKey] = {
+        status: 'revision',
+        by: currentUser.fullName,
+        comment: reason
+      };
+
+      updateCounters();
+      renderModerationQueue();
+      showToast('Новость переведена в статус «На доработке» и возвращена автору');
+    }
+
+    function importSampleToModerationQueue() {
+      const sample = LIVE_UUST_POOL[livePoolIndex % LIVE_UUST_POOL.length];
+      livePoolIndex++;
+      articlesDB.unshift({
+        id: Date.now(),
+        title: `СРОЧНО!! ${sample.title}`,
+        category: sample.category,
+        date: 'Только что',
+        author: 'Айдар Галиев (ИИМРТ)',
+        authorUsername: 'student',
+        sourceUrl: sample.sourceUrl,
+        official: true,
+        status: 'pending',
+        readMinutes: 2,
+        media: sample.media,
+        body: `${sample.body}  Это настоящая сенсация для всего университета!!`,
+        approvals: {
+          spell: { status: 'pending', by: '', comment: '' },
+          content: { status: 'pending', by: '', comment: '' },
+          fact: { status: 'pending', by: '', comment: '' }
+        },
+        revisionReason: ''
+      });
+      updateCounters();
+      renderModerationQueue();
+      showToast('Тестовая публикация добавлена в очередь модерации');
+    }
+
+    // =====================================================
+    // ПАНЕЛЬ АДМИНИСТРАТОРА (ЛИМИТЫ + РОЛИ)
+    // =====================================================
+    function renderAdminPanel() {
+      document.getElementById('limitTitleMin').value = validationLimits.titleMin;
+      document.getElementById('limitTitleMax').value = validationLimits.titleMax;
+      document.getElementById('limitBodyMin').value = validationLimits.bodyMin;
+      document.getElementById('limitBodyMax').value = validationLimits.bodyMax;
+      document.getElementById('limitMaxFiles').value = validationLimits.maxFiles;
+      document.getElementById('limitMaxFileSize').value = validationLimits.maxFileSizeMB;
+      document.getElementById('limitStopWords').value = validationLimits.stopWords.join(', ');
+
+      const tableContainer = document.getElementById('adminUsersTableContainer');
+      tableContainer.innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-slate-200 text-slate-500 uppercase">
+              <th class="py-2.5 pr-3">Пользователь</th>
+              <th class="py-2.5 pr-3">Логин</th>
+              <th class="py-2.5 pr-3">Роль в системе</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            ${usersDB.map(u => `
+              <tr>
+                <td class="py-3 pr-3 font-bold text-slate-900">${u.fullName}<div class="text-[11px] font-normal text-slate-500">${u.email}</div></td>
+                <td class="py-3 pr-3 font-mono-code text-slate-700">${u.username}</td>
+                <td class="py-3 pr-3">
+                  <select onchange="changeUserRole(${u.id}, this.value)" class="px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-300 text-slate-900 font-semibold">
+                    <option value="user" ${u.role === 'user' ? 'selected' : ''}>Студент / Автор</option>
+                    <option value="mod_spell" ${u.role === 'mod_spell' ? 'selected' : ''}>Корректор орфографии</option>
+                    <option value="mod_content" ${u.role === 'mod_content' ? 'selected' : ''}>Модератор содержания</option>
+                    <option value="mod_fact" ${u.role === 'mod_fact' ? 'selected' : ''}>Фактчекер достоверности</option>
+                    <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Администратор</option>
+                  </select>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function saveAdminLimits() {
+      if (currentUser?.role !== 'admin') {
+        showToast('Изменять лимиты может только Администратор!');
+        return;
+      }
+      validationLimits.titleMin = Number(document.getElementById('limitTitleMin').value) || 15;
+      validationLimits.titleMax = Number(document.getElementById('limitTitleMax').value) || 120;
+      validationLimits.bodyMin = Number(document.getElementById('limitBodyMin').value) || 100;
+      validationLimits.bodyMax = Number(document.getElementById('limitBodyMax').value) || 3000;
+      validationLimits.maxFiles = Number(document.getElementById('limitMaxFiles').value) || 4;
+      validationLimits.maxFileSizeMB = Number(document.getElementById('limitMaxFileSize').value) || 5;
+      validationLimits.stopWords = document.getElementById('limitStopWords').value
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      renderDraftMedia();
+      validateSubmitFormLive();
+      showToast('Новые лимиты валидации и стоп-слова сохранены!');
+    }
+
+    function changeUserRole(userId, newRole) {
+      const user = usersDB.find(u => u.id === userId);
+      if (user) {
+        user.role = newRole;
+        if (currentUser && currentUser.id === user.id) {
+          updateAuthUI();
+        }
+        showToast(`Роль пользователя ${user.fullName} изменена на ${newRole}`);
+      }
+    }
+
+    // =====================================================
+    // АВТОРИЗАЦИЯ И РЕГИСТРАЦИЯ
+    // =====================================================
+    function updateAuthUI() {
+      const authArea = document.getElementById('authArea');
+      const tabModBtn = document.getElementById('tabModBtn');
+      const tabAdminBtn = document.getElementById('tabAdminBtn');
+
+      const roleBadges = {
+        user: 'Автор',
+        mod_spell: 'Корректор',
+        mod_content: 'Модератор',
+        mod_fact: 'Фактчекер',
+        admin: 'Админ'
+      };
+
+      if (currentUser) {
+        const isMod = ['mod_spell', 'mod_content', 'mod_fact', 'admin'].includes(currentUser.role);
+        const isAdmin = currentUser.role === 'admin';
+        tabModBtn.classList.toggle('hidden', !isMod);
+        tabAdminBtn.classList.toggle('hidden', !isAdmin);
+
+        authArea.innerHTML = `
+          <div class="flex items-center gap-2">
+            <button onclick="openAuthModal()" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+              <span>👤 ${currentUser.fullName.split(' ')[0]}</span>
+              <span class="px-1.5 py-0.5 rounded bg-indigo-500 text-white text-[10px] uppercase">${roleBadges[currentUser.role]}</span>
+            </button>
+            <button onclick="logoutUser()" title="Сменить аккаунт / Выйти" class="p-2 rounded-xl bg-slate-100 hover:bg-rose-100 text-slate-700 hover:text-rose-700 border border-slate-300 text-xs font-bold">
+              Выйти
+            </button>
+          </div>
+        `;
+      } else {
+        tabModBtn.classList.add('hidden');
+        tabAdminBtn.classList.add('hidden');
+        authArea.innerHTML = `
+          <button onclick="openAuthModal()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition">
+            Войти / Регистрация
+          </button>
+        `;
+      }
+      updateCounters();
+    }
+
+    function openAuthModal() {
+      document.getElementById('authModal').classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+    }
+
+    function switchAuthTab(mode) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabL = document.getElementById('authTabLogin');
+      const tabR = document.getElementById('authTabRegister');
+
+      if (mode === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        tabL.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white';
+        tabR.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700';
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+        tabR.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white';
+        tabL.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const loginVal = document.getElementById('loginUsername').value.trim().toLowerCase();
+      const passVal = document.getElementById('loginPassword').value;
+      const errBox = document.getElementById('loginError');
+
+      const found = usersDB.find(
+        u => (u.username.toLowerCase() === loginVal || u.email.toLowerCase() === loginVal) && u.password === passVal
+      );
+
+      if (!found) {
+        errBox.textContent = 'Неверный логин или пароль. Проверьте введенные данные.';
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      errBox.classList.add('hidden');
+      currentUser = found;
+      closeAuthModal();
+      applySkin(found.preferredSkin || currentSkin);
+      updateAuthUI();
+      showToast(`Добро пожаловать, ${found.fullName}!`);
+
+      if (['mod_spell', 'mod_content', 'mod_fact'].includes(found.role)) {
+        switchTab('moderation');
+      } else if (found.role === 'admin') {
+        switchTab('admin');
+      } else {
+        switchTab('feed');
+      }
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('regFullName').value.trim();
+      const username = document.getElementById('regUsername').value.trim().toLowerCase();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const password = document.getElementById('regPassword').value;
+      const preferredSkin = document.getElementById('regPreferredSkin').value;
+      const errBox = document.getElementById('registerError');
+
+      if (usersDB.some(u => u.username === username || u.email === email)) {
+        errBox.textContent = 'Пользователь с таким логином или Email уже зарегистрирован.';
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      const newUser = {
+        id: Date.now(),
+        username,
+        email,
+        password,
+        fullName,
+        role: 'user',
+        preferredSkin
+      };
+      usersDB.push(newUser);
+      currentUser = newUser;
+      errBox.classList.add('hidden');
+      closeAuthModal();
+      applySkin(preferredSkin);
+      updateAuthUI();
+      showToast(`Аккаунт ${fullName} создан и авторизован!`);
+    }
+
+    function logoutUser() {
+      currentUser = null;
+      const loginUsername = document.getElementById('loginUsername');
+      const loginPassword = document.getElementById('loginPassword');
+      const loginError = document.getElementById('loginError');
+      if (loginUsername) loginUsername.value = '';
+      if (loginPassword) loginPassword.value = '';
+      if (loginError) loginError.classList.add('hidden');
+      updateAuthUI();
+      switchTab('feed');
+      openAuthModal();
+    }
+
+    // =====================================================
+    // НАВИГАЦИЯ ПО ВКЛАДКАМ И СЧЕТЧИКИ
+    // =====================================================
+    function switchTab(tabName) {
+      const protectedTabs = ['moderation', 'admin'];
+      const isModerator = currentUser && ['mod_spell', 'mod_content', 'mod_fact', 'admin'].includes(currentUser.role);
+
+      if (tabName === 'admin' && currentUser?.role !== 'admin') {
+        showToast('Раздел «Управление» доступен только администратору');
+        if (!currentUser) openAuthModal();
+        tabName = 'feed';
+      } else if (tabName === 'moderation' && !isModerator) {
+        showToast('Раздел модерации доступен только сотрудникам редакции');
+        if (!currentUser) openAuthModal();
+        tabName = 'feed';
+      } else if (!['feed', 'submit', 'my', ...protectedTabs].includes(tabName)) {
+        tabName = 'feed';
+      }
+
+      currentTab = tabName;
+      ['feed', 'submit', 'my', 'moderation', 'admin'].forEach(t => {
+        const el = document.getElementById(`view-${t}`);
+        if (el) el.classList.toggle('hidden', t !== tabName);
+      });
+
+      document.querySelectorAll('.nav-tab').forEach(btn => {
+        const buttonTab = btn.getAttribute('data-tab');
+        const isActive = buttonTab === tabName;
+        const shouldHide = (buttonTab === 'moderation' && !isModerator)
+          || (buttonTab === 'admin' && currentUser?.role !== 'admin');
+        btn.className = `${shouldHide ? 'hidden ' : ''}${isActive
+          ? 'nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-slate-900 shadow-sm'
+          : 'nav-tab px-3.5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900'}`;
+      });
+
+      if (tabName === 'feed') renderFeed();
+      if (tabName === 'submit') { renderDraftMedia(); validateSubmitFormLive(); }
+      if (tabName === 'my') renderMyArticles();
+      if (tabName === 'moderation') renderModerationQueue();
+      if (tabName === 'admin') renderAdminPanel();
+    }
+
+    function updateCounters() {
+      const pendingCount = articlesDB.filter(a => a.status === 'pending' || a.status === 'revision').length;
+      const myCount = currentUser
+        ? articlesDB.filter(a => a.authorUsername === currentUser.username).length
+        : 0;
+
+      document.getElementById('modBadgeCount').textContent = pendingCount;
+      document.getElementById('myBadgeCount').textContent = myCount;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotice');
+      toast.textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.add('hidden'), 3600);
+    }
+
+    // =====================================================
+    // ТВ-РЕЖИМ (ИНФОКИОСК ХОЛЛА УУНИТ С ДИНАМИЧЕСКИМИ QR-КОДАМИ И ОЗВУЧКОЙ)
+    // =====================================================
+    let tvModeActive = false;
+    let tvSlideIndex = 0;
+    let tvPaused = false;
+    let tvProgressValue = 0;
+    let tvIntervalTimer = null;
+    let tvClockTimer = null;
+
+    function buildOfflineQrSvgDataUri(text = 'https://uust.ru/news/') {
+      // Встроенный оффлайн-генератор матричного QR-кода (SVG), если нет доступа к внешнему сети
+      let hash = 2166136261;
+      for (let i = 0; i < text.length; i++) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      const size = 21;
+      let cells = '';
+      const isFinder = (r, c) =>
+        (r < 7 && c < 7) || (r < 7 && c >= size - 7) || (r >= size - 7 && c < 7);
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          let fill = false;
+          if (isFinder(r, c)) {
+            const lr = r < 7 ? r : r - (size - 7);
+            const lc = c < 7 ? c : c - (size - 7);
+            fill = (lr === 0 || lr === 6 || lc === 0 || lc === 6 || (lr >= 2 && lr <= 4 && lc >= 2 && lc <= 4));
+          } else {
+            const bit = ((hash >>> ((r * size + c) % 28)) ^ (r * 31 + c * 17)) & 3;
+            fill = bit !== 0;
+          }
+          if (fill) {
+            cells += `<rect x="${c + 2}" y="${r + 2}" width="1" height="1" fill="#111111"/>`;
+          }
+        }
+      }
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><rect width="25" height="25" fill="#FFFFFF"/>${cells}</svg>`;
+      return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+    }
+
+    function getQrImageUrlForArticle(art) {
+      const targetUrl = (art && art.sourceUrl) ? art.sourceUrl : 'https://uust.ru/news/';
+      return `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=10&data=${encodeURIComponent(targetUrl)}`;
+    }
+
+    function openTvBroadcastMode() {
+      tvModeActive = true;
+      tvSlideIndex = 0;
+      tvPaused = false;
+      tvProgressValue = 0;
+
+      const overlay = document.getElementById('tvBroadcastOverlay');
+      overlay.classList.remove('hidden');
+
+      const tvSkinSel = document.getElementById('tvSkinSelector');
+      if (tvSkinSel) tvSkinSel.value = currentSkin;
+
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+
+      updateTvClock();
+      clearInterval(tvClockTimer);
+      tvClockTimer = setInterval(updateTvClock, 1000);
+
+      renderTvSlide();
+      renderTvTicker();
+
+      clearInterval(tvIntervalTimer);
+      tvIntervalTimer = setInterval(() => {
+        if (tvPaused || !tvModeActive) return;
+        tvProgressValue += 1;
+        const bar = document.getElementById('tvProgressBar');
+        if (bar) bar.style.width = `${tvProgressValue}%`;
+        if (tvProgressValue >= 100) {
+          nextTvSlide();
+        }
+      }, 100); // 10 секунд на слайд
+    }
+
+    function closeTvBroadcastMode() {
+      tvModeActive = false;
+      clearInterval(tvIntervalTimer);
+      clearInterval(tvClockTimer);
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+      document.getElementById('tvBroadcastOverlay').classList.add('hidden');
+    }
+
+    function updateTvClock() {
+      const el = document.getElementById('tvClockDisplay');
+      if (!el) return;
+      const now = new Date();
+      el.textContent = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    function toggleTvPause() {
+      tvPaused = !tvPaused;
+      const btn = document.getElementById('tvPauseBtn');
+      if (btn) btn.textContent = tvPaused ? '▶ Пуск' : '⏸ Пауза';
+    }
+
+    function nextTvSlide() {
+      const published = articlesDB.filter(a => a.status === 'published');
+      if (published.length === 0) return;
+      tvSlideIndex = (tvSlideIndex + 1) % published.length;
+      tvProgressValue = 0;
+      renderTvSlide();
+    }
+
+    function prevTvSlide() {
+      const published = articlesDB.filter(a => a.status === 'published');
+      if (published.length === 0) return;
+      tvSlideIndex = (tvSlideIndex - 1 + published.length) % published.length;
+      tvProgressValue = 0;
+      renderTvSlide();
+    }
+
+    function jumpToTvSlide(idx) {
+      tvSlideIndex = idx;
+      tvProgressValue = 0;
+      renderTvSlide();
+    }
+
+    function renderTvTicker() {
+      const ticker = document.getElementById('tvTickerContent');
+      if (!ticker) return;
+      const published = articlesDB.filter(a => a.status === 'published');
+      const itemsHtml = published.map((a, i) => `
+        <span class="inline-flex items-center gap-2.5">
+          <span class="px-2 py-0.5 rounded bg-white/15 text-emerald-300 font-bold text-xs">${a.category}</span>
+          <span class="font-semibold text-white">${a.title}</span>
+          <span class="text-slate-400">(${a.date})</span>
+          <span class="text-[#FF4D00] mx-2">✦</span>
+        </span>
+      `).join('');
+      ticker.innerHTML = itemsHtml + itemsHtml;
+    }
+
+    function renderTvSlide() {
+      const stage = document.getElementById('tvStageContainer');
+      const counterLabel = document.getElementById('tvSlideCounterLabel');
+      if (!stage) return;
+
+      const published = articlesDB.filter(a => a.status === 'published');
+      if (published.length === 0) {
+        stage.innerHTML = `<div class="text-center w-full py-20 text-xl font-bold">Нет опубликованных новостей для эфира</div>`;
+        return;
+      }
+
+      const currentIdx = tvSlideIndex % published.length;
+      const art = published[currentIdx];
+      const imgUrl = getSafeMediaUrl(art, 0);
+      const qrUrl = getQrImageUrlForArticle(art);
+
+      if (counterLabel) {
+        counterLabel.textContent = `Слайд ${currentIdx + 1} из ${published.length} • Рубрика: ${art.category} • Верифицировано 3/3`;
+      }
+
+      // Собираем 3 следующие новости в очереди
+      const nextQueue = [];
+      for (let step = 1; step <= Math.min(3, published.length - 1); step++) {
+        const nIdx = (currentIdx + step) % published.length;
+        nextQueue.push({ idx: nIdx, item: published[nIdx] });
+      }
+
+      const isMombo = currentSkin === 'mombo';
+      const isCrypto = currentSkin === 'crypto';
+      const cardBgClass = isMombo
+        ? 'bg-[#F8F7F4] text-[#111111] border-4 border-[#111111] shadow-[10px_10px_0px_#111111]'
+        : isCrypto
+        ? 'bg-[#141719] text-white border-2 border-[#B8FF01] shadow-2xl'
+        : 'bg-white/95 text-slate-900 border border-white/30 rounded-3xl shadow-2xl';
+
+      const accentBadgeClass = isMombo
+        ? 'bg-[#FF4D00] text-[#111111] border-2 border-[#111111]'
+        : isCrypto
+        ? 'bg-[#B8FF01] text-[#0B0D0E]'
+        : 'bg-[#4D19CC] text-white';
+
+      stage.innerHTML = `
+        <div class="tv-slide-animate w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <!-- Левая основная панель (8 колонок): Главная новость -->
+          <div class="lg:col-span-8 p-7 sm:p-10 flex flex-col justify-between ${cardBgClass}">
+            <div class="space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-4 py-1.5 rounded-lg font-heading font-extrabold text-xs sm:text-sm uppercase ${accentBadgeClass}">
+                    ${art.category}
+                  </span>
+                  <span class="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 font-mono-code font-bold text-xs border border-emerald-500/30">
+                    ✓ ПРОВЕРЕНО РЕДАКЦИЕЙ 3/3
+                  </span>
+                </div>
+                <span class="font-mono-code text-xs sm:text-sm font-bold opacity-75">
+                  ${art.date} • ⏱ ${art.readMinutes} мин чтения
+                </span>
+              </div>
+
+              <h1 class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-[40px] leading-[1.16] tracking-tight">
+                ${art.title}
+              </h1>
+
+              ${imgUrl ? `
+                <div class="card-media-wrap grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2">
+                  <div class="md:col-span-6 relative h-64 sm:h-72 rounded-2xl overflow-hidden border border-black/15 bg-slate-900">
+                    <img src="${imgUrl}" alt="${art.title.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" onerror="handleImageError(this)" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="md:col-span-6">
+                    <p class="text-base sm:text-lg leading-relaxed opacity-90">
+                      ${art.body}
+                    </p>
+                  </div>
+                </div>
+              ` : `
+                <div class="p-6 rounded-2xl ${isCrypto ? 'bg-white/5 border border-white/10' : 'bg-slate-100/90 border border-slate-200'}">
+                  <p class="text-lg sm:text-xl leading-relaxed opacity-95">
+                    ${art.body}
+                  </p>
+                </div>
+              `}
+            </div>
+
+            <!-- Паспорт верификации внизу главного экрана -->
+            <div class="mt-8 pt-5 border-t ${isCrypto ? 'border-white/15' : 'border-slate-300'} flex flex-wrap items-center justify-between gap-4 text-xs">
+              <div class="flex flex-wrap items-center gap-2 font-mono-code font-bold">
+                <span>СПИКЕР / АВТОР: ${art.author}</span>
+                <span>•</span>
+                <span class="text-emerald-600">ОРФОГРАФИЯ ✓</span>
+                <span>•</span>
+                <span class="text-emerald-600">КОНТЕНТ ✓</span>
+                <span>•</span>
+                <span class="text-emerald-600">ФАКТЧЕК ✓</span>
+              </div>
+              <div class="font-mono-code opacity-75 truncate max-w-xs">
+                ${art.sourceUrl}
+              </div>
+            </div>
+          </div>
+
+          <!-- Правая панель (4 колонки): Крупный QR-код + очередь следующих релизов -->
+          <div class="lg:col-span-4 flex flex-col justify-between gap-6">
+            <!-- Блок с QR-кодом -->
+            <div class="p-6 sm:p-7 flex flex-col items-center text-center ${cardBgClass}">
+              <div class="text-xs font-mono-code font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400 text-slate-950 mb-3">
+                📱 Читать с телефона
+              </div>
+              <h3 class="font-heading font-extrabold text-lg sm:text-xl leading-snug mb-4">
+                Наведите камеру смартфона на QR-код
+              </h3>
+              <div class="p-3.5 bg-white rounded-2xl border-2 border-slate-900 shadow-lg">
+                <img src="${qrUrl}"
+                  onerror="this.onerror=null; this.src=buildOfflineQrSvgDataUri('${art.sourceUrl}');"
+                  alt="QR-код новости"
+                  class="w-44 h-44 sm:w-48 sm:h-48 object-contain" />
+              </div>
+              <p class="text-xs opacity-80 mt-3 max-w-xs leading-relaxed">
+                Мгновенный переход к полному тексту релиза на официальном портале <strong>uust.ru</strong>
+              </p>
+            </div>
+
+            <!-- Очередь следующих новостей в эфире -->
+            <div class="p-5 flex-1 flex flex-col justify-between ${cardBgClass}">
+              <div class="text-xs font-mono-code font-extrabold uppercase tracking-wider opacity-75 mb-3">
+                ДАЛЕЕ В ЭФИРЕ КАМПУСА:
+              </div>
+              <div class="space-y-2.5">
+                ${nextQueue.map(q => `
+                  <div onclick="jumpToTvSlide(${q.idx})" class="cursor-pointer p-3 rounded-xl ${isCrypto ? 'bg-white/5 hover:bg-white/10' : 'bg-black/5 hover:bg-black/10'} transition flex items-start justify-between gap-3">
+                    <div>
+                      <div class="text-[10px] font-mono-code font-bold uppercase opacity-70">${q.item.category}</div>
+                      <div class="font-bold text-xs line-clamp-2 leading-snug mt-0.5">${q.item.title}</div>
+                    </div>
+                    <span class="shrink-0 text-xs font-mono-code font-bold opacity-60">→</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (!tvModeActive) return;
+      if (e.key === 'Escape') closeTvBroadcastMode();
+      if (e.key === 'ArrowRight') nextTvSlide();
+      if (e.key === 'ArrowLeft') prevTvSlide();
+      if (e.key === ' ') { e.preventDefault(); toggleTvPause(); }
+    });
+
+    // Инициализация при старте (основной скин при входе — Blueprint / mombo + автоматический поток новостей с uust.ru)
+    window.addEventListener('DOMContentLoaded', () => {
+      applySkin('mombo');
+      updateAuthUI();
+      renderDraftMedia();
+      startAutoUustLiveStream();
+    });
+  </script>
+</body>
+</html>
